@@ -164,9 +164,9 @@ const products = [
 
         shortName: "Túi Refill Dầu gội Bưởi",
 
-        category: "refill",
+        category: "dau-goi",
 
-        categoryName: "Refill",
+        categoryName: "Dầu gội",
 
         price: 310000,
 
@@ -294,7 +294,7 @@ const products = [
 
         shortName: "Combo Dầu gội & Dầu xả Bưởi",
 
-        category: "combo",
+        category: "bo-doi",
 
         categoryName: "Combo",
 
