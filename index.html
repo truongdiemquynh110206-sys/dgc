@@ -2,48 +2,164 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Nâng niu mái tóc Việt | Dầu gội Bưởi Cocoon</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="description"
-          content="Nâng niu mái tóc Việt - Dầu gội, dầu xả, túi refill và combo Bưởi Cocoon.">
+    <meta
+        name="description"
+        content="Nâng niu mái tóc Việt - Dầu gội, dầu xả và các sản phẩm chăm sóc tóc Bưởi Cocoon."
+    >
 
-    <link rel="stylesheet" href="style.css">
+    <meta
+        name="theme-color"
+        content="#173f2b"
+    >
 
-    <!-- Font mềm mại, uyển chuyển -->
+    <title>
+        Nâng niu mái tóc Việt | Cocoon Bưởi
+    </title>
+
+
+    <!-- =====================================================
+         GOOGLE FONTS
+         ===================================================== -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
+
 
 <body>
 
-<!-- =====================================================
+<!-- =========================================================
      HEADER
-===================================================== -->
+     ========================================================= -->
 
-<header class="header">
+<header class="site-header">
 
-    <div class="container header-inner">
+    <div class="header-inner">
 
-        <a href="#trang-chu" class="logo">
-            <span class="logo-small">Nâng niu</span>
-            <span class="logo-main">mái tóc Việt</span>
+        <!-- LOGO -->
+
+        <a
+            href="#home"
+            class="brand"
+            aria-label="Nâng niu mái tóc Việt"
+        >
+
+            <span class="brand-leaf">
+                ❋
+            </span>
+
+            <span class="brand-text">
+
+                <strong>
+                    Nâng niu
+                </strong>
+
+                <span>
+                    mái tóc Việt
+                </span>
+
+            </span>
+
         </a>
 
-        <nav class="navigation">
-            <a href="#trang-chu">Trang chủ</a>
-            <a href="#san-pham">Sản phẩm</a>
-            <a href="#cau-chuyen">Câu chuyện</a>
-            <a href="#tu-van">Tư vấn</a>
-            <a href="#dat-hang">Đặt hàng</a>
+
+        <!-- MENU MOBILE -->
+
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            type="button"
+            aria-label="Mở menu"
+            aria-expanded="false"
+        >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+
+        <!-- NAVIGATION -->
+
+        <nav
+            class="main-navigation"
+            id="mainNavigation"
+        >
+
+            <a href="#home">
+                Trang chủ
+            </a>
+
+            <a href="#products">
+                Sản phẩm
+            </a>
+
+            <a href="#story">
+                Câu chuyện
+            </a>
+
+            <a href="#consultation">
+                Tư vấn
+            </a>
+
+            <a href="#order">
+                Đặt hàng
+            </a>
+
         </nav>
 
-        <button class="cart-button" onclick="openCart()">
-            <span class="cart-icon">🛒</span>
-            <span>Giỏ hàng</span>
-            <b id="cartCount">0</b>
+
+        <!-- CART -->
+
+        <button
+            class="header-cart"
+            id="openCartButton"
+            type="button"
+            aria-label="Mở giỏ hàng"
+        >
+
+            <span class="cart-icon">
+                🛍
+            </span>
+
+            <span class="cart-label">
+                Giỏ hàng
+            </span>
+
+            <span
+                class="cart-count"
+                id="cartCount"
+            >
+                0
+            </span>
+
         </button>
 
     </div>
@@ -51,914 +167,801 @@
 </header>
 
 
-<!-- =====================================================
-     HERO
-===================================================== -->
+
+<!-- =========================================================
+     MAIN
+     ========================================================= -->
 
 <main>
 
-<section class="hero" id="trang-chu">
 
-    <div class="hero-overlay"></div>
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
 
-    <div class="container hero-content">
+    <section
+        class="hero"
+        id="home"
+    >
 
-        <div class="hero-text">
+        <div class="hero-background-shape hero-shape-one"></div>
+        <div class="hero-background-shape hero-shape-two"></div>
 
-            <span class="hero-label">
-                BƯỞI COCoon • CHĂM TÓC TỪ THIÊN NHIÊN
-            </span>
 
-            <h1>
-                Suối tóc<br>
-                <em>thanh xuân</em>
-            </h1>
+        <div class="container hero-container">
 
-            <p class="hero-slogan">
-                Suối tóc thanh xuân gội từ đất mẹ.
-                Hãy để mái tóc kể câu chuyện của thiên nhiên.
-            </p>
+            <div class="hero-content">
 
-            <div class="hero-buttons">
-
-                <a href="#san-pham" class="btn btn-primary">
-                    Khám phá sản phẩm
-                </a>
-
-                <a href="#cau-chuyen" class="btn btn-outline">
-                    Câu chuyện thiên nhiên
-                </a>
-
-            </div>
-
-        </div>
-
-        <div class="hero-product">
-
-            <div class="hero-circle"></div>
-
-            <div class="hero-product-card">
-
-                <span class="product-badge">
-                    COCOON
+                <span class="eyebrow">
+                    CHĂM SÓC TÓC TỪ THIÊN NHIÊN
                 </span>
 
-                <div class="bottle bottle-shampoo">
 
-                    <div class="bottle-cap"></div>
+                <h1>
+                    Suối tóc thanh xuân
+                    <br>
+                    gội từ đất mẹ.
+                </h1>
 
-                    <div class="bottle-body">
 
-                        <div class="bottle-label">
-                            <strong>COCOON</strong>
-                            <span>Bưởi</span>
-                            <small>
-                                Pomelo<br>
-                                Hair Tonic
-                            </small>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     GIỚI THIỆU NGẮN
-===================================================== -->
-
-<section class="intro">
-
-    <div class="container intro-grid">
-
-        <div class="intro-item">
-            <span class="intro-number">01</span>
-            <div>
-                <h3>Từ thiên nhiên</h3>
-                <p>
-                    Lấy cảm hứng từ những nguyên liệu gần gũi
-                    với mái tóc Việt.
-                </p>
-            </div>
-        </div>
-
-        <div class="intro-item">
-            <span class="intro-number">02</span>
-            <div>
-                <h3>Chăm sóc dịu lành</h3>
-                <p>
-                    Nuôi dưỡng mái tóc bằng những công thức
-                    chăm sóc nhẹ nhàng.
-                </p>
-            </div>
-        </div>
-
-        <div class="intro-item">
-            <span class="intro-number">03</span>
-            <div>
-                <h3>Cho tóc thêm yêu</h3>
-                <p>
-                    Một chu trình chăm sóc đơn giản để tóc
-                    luôn mềm mại và tràn đầy sức sống.
-                </p>
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     SẢN PHẨM
-===================================================== -->
-
-<section class="products-section" id="san-pham">
-
-    <div class="container">
-
-        <div class="section-heading">
-
-            <div>
-                <span class="section-label">
-                    BỘ SƯU TẬP BƯỞI COCOON
-                </span>
-
-                <h2>
-                    Chạm vào <em>mái tóc</em>
-                </h2>
-            </div>
-
-            <p>
-                Những sản phẩm chăm sóc tóc Bưởi Cocoon
-                dành cho hành trình yêu thương mái tóc mỗi ngày.
-            </p>
-
-        </div>
-
-
-        <!-- DANH MỤC -->
-
-        <div class="category-tabs">
-
-            <button class="category-btn active"
-                    onclick="filterProducts('all', this)">
-                Tất cả
-            </button>
-
-            <button class="category-btn"
-                    onclick="filterProducts('shampoo', this)">
-                Dầu gội
-            </button>
-
-            <button class="category-btn"
-                    onclick="filterProducts('conditioner', this)">
-                Dầu xả
-            </button>
-
-            <button class="category-btn"
-                    onclick="filterProducts('refill', this)">
-                Túi refill
-            </button>
-
-            <button class="category-btn"
-                    onclick="filterProducts('combo', this)">
-                Combo
-            </button>
-
-        </div>
-
-
-        <!-- PRODUCT GRID -->
-
-        <div class="product-grid" id="productGrid">
-
-
-            <!-- SẢN PHẨM 1 -->
-
-            <article class="product-card"
-                     data-category="shampoo">
-
-                <div class="product-image green-bg">
-
-                    <span class="product-tag">
-                        BÁN CHẠY
-                    </span>
-
-                    <div class="fake-product shampoo-product">
-
-                        <div class="fake-cap"></div>
-
-                        <div class="fake-bottle">
-
-                            <div class="fake-label">
-                                <b>COCOON</b>
-                                <strong>Bưởi</strong>
-                                <small>
-                                    Dầu gội<br>
-                                    Pomelo Shampoo
-                                </small>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="product-info">
-
-                    <span class="product-type">
-                        DẦU GỘI
-                    </span>
-
-                    <h3>
-                        Dầu gội Bưởi Cocoon
-                    </h3>
-
-                    <p>
-                        Làm sạch dịu nhẹ, mang đến cảm giác
-                        sạch thoáng và tươi mới cho mái tóc.
-                    </p>
-
-                    <div class="product-bottom">
-
-                        <strong class="price">
-                            195.000₫
-                        </strong>
-
-                        <button onclick="addToCart(1)">
-                            + Thêm vào giỏ
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- SẢN PHẨM 2 -->
-
-            <article class="product-card"
-                     data-category="conditioner">
-
-                <div class="product-image cream-bg">
-
-                    <span class="product-tag">
-                        DỊU MỀM
-                    </span>
-
-                    <div class="fake-product conditioner-product">
-
-                        <div class="fake-cap"></div>
-
-                        <div class="fake-bottle">
-
-                            <div class="fake-label">
-                                <b>COCOON</b>
-                                <strong>Bưởi</strong>
-                                <small>
-                                    Dầu xả<br>
-                                    Pomelo Conditioner
-                                </small>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="product-info">
-
-                    <span class="product-type">
-                        DẦU XẢ
-                    </span>
-
-                    <h3>
-                        Dầu xả Bưởi Cocoon
-                    </h3>
-
-                    <p>
-                        Giúp mái tóc trở nên mềm mại,
-                        dễ chải và óng mượt hơn.
-                    </p>
-
-                    <div class="product-bottom">
-
-                        <strong class="price">
-                            195.000₫
-                        </strong>
-
-                        <button onclick="addToCart(2)">
-                            + Thêm vào giỏ
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- SẢN PHẨM 3 -->
-
-            <article class="product-card"
-                     data-category="refill">
-
-                <div class="product-image yellow-bg">
-
-                    <span class="product-tag">
-                        TIẾT KIỆM
-                    </span>
-
-                    <div class="refill-pack">
-
-                        <div class="refill-top"></div>
-
-                        <div class="refill-label">
-
-                            <b>COCOON</b>
-
-                            <strong>Bưởi</strong>
-
-                            <small>
-                                REFILL<br>
-                                Dầu gội
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="product-info">
-
-                    <span class="product-type">
-                        TÚI REFILL
-                    </span>
-
-                    <h3>
-                        Túi refill dầu gội Bưởi
-                    </h3>
-
-                    <p>
-                        Giải pháp tiện lợi giúp bạn bổ sung
-                        dầu gội mà không cần mua chai mới.
-                    </p>
-
-                    <div class="product-bottom">
-
-                        <strong class="price">
-                            165.000₫
-                        </strong>
-
-                        <button onclick="addToCart(3)">
-                            + Thêm vào giỏ
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- SẢN PHẨM 4 -->
-
-            <article class="product-card"
-                     data-category="refill">
-
-                <div class="product-image light-green-bg">
-
-                    <span class="product-tag">
-                        MỚI
-                    </span>
-
-                    <div class="refill-pack conditioner-refill">
-
-                        <div class="refill-top"></div>
-
-                        <div class="refill-label">
-
-                            <b>COCOON</b>
-
-                            <strong>Bưởi</strong>
-
-                            <small>
-                                REFILL<br>
-                                Dầu xả
-                            </small>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="product-info">
-
-                    <span class="product-type">
-                        TÚI REFILL
-                    </span>
-
-                    <h3>
-                        Túi refill dầu xả Bưởi
-                    </h3>
-
-                    <p>
-                        Tiện lợi, tiết kiệm và phù hợp cho
-                        chu trình chăm sóc tóc hằng ngày.
-                    </p>
-
-                    <div class="product-bottom">
-
-                        <strong class="price">
-                            165.000₫
-                        </strong>
-
-                        <button onclick="addToCart(4)">
-                            + Thêm vào giỏ
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- SẢN PHẨM 5 -->
-
-            <article class="product-card product-card-large"
-                     data-category="combo">
-
-                <div class="product-image combo-bg">
-
-                    <span class="product-tag">
-                        COMBO
-                    </span>
-
-                    <div class="combo-products">
-
-                        <div class="mini-bottle">
-                            <div class="mini-cap"></div>
-                            <div class="mini-body">
-                                <span>COCOON</span>
-                                <b>Bưởi</b>
-                            </div>
-                        </div>
-
-                        <div class="mini-bottle conditioner">
-                            <div class="mini-cap"></div>
-                            <div class="mini-body">
-                                <span>COCOON</span>
-                                <b>Bưởi</b>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="product-info">
-
-                    <span class="product-type">
-                        COMBO CHĂM TÓC
-                    </span>
-
-                    <h3>
-                        Combo dầu gội & dầu xả Bưởi Cocoon
-                    </h3>
-
-                    <p>
-                        Bộ đôi hoàn chỉnh cho chu trình chăm sóc
-                        tóc từ làm sạch đến dưỡng mềm.
-                    </p>
-
-                    <div class="product-bottom">
-
-                        <div>
-                            <span class="old-price">
-                                390.000₫
-                            </span>
-
-                            <strong class="price">
-                                365.000₫
-                            </strong>
-                        </div>
-
-                        <button onclick="addToCart(5)">
-                            + Thêm vào giỏ
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     CÂU CHUYỆN
-===================================================== -->
-
-<section class="story-section" id="cau-chuyen">
-
-    <div class="container story-grid">
-
-        <div class="story-image">
-
-            <div class="story-circle"></div>
-
-            <div class="story-bottle">
-
-                <div class="story-cap"></div>
-
-                <div class="story-bottle-body">
-
-                    <span>COCOON</span>
-                    <strong>Bưởi</strong>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="story-content">
-
-            <span class="section-label">
-                CÂU CHUYỆN CỦA MÁI TÓC
-            </span>
-
-            <h2>
-                Một chút <em>thiên nhiên</em><br>
-                cho mỗi ngày dịu dàng
-            </h2>
-
-            <p>
-                Mái tóc Việt đã từ lâu gắn liền với những nguyên liệu
-                tự nhiên thân thuộc. Từ bồ kết, bưởi cho đến những
-                loại thảo mộc quanh ta, thiên nhiên luôn là nguồn
-                cảm hứng cho hành trình chăm sóc tóc.
-            </p>
-
-            <p>
-                Nâng niu mái tóc Việt mang tinh thần ấy vào một
-                không gian hiện đại, nơi mỗi sản phẩm Bưởi Cocoon
-                trở thành một bước nhỏ trong nghi thức yêu thương
-                bản thân mỗi ngày.
-            </p>
-
-            <div class="story-quote">
-                “Đẹp từ những điều gần gũi nhất.”
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     QUY TRÌNH CHĂM TÓC
-===================================================== -->
-
-<section class="routine-section">
-
-    <div class="container">
-
-        <div class="section-heading center">
-
-            <span class="section-label">
-                NGHI THỨC CHĂM TÓC
-            </span>
-
-            <h2>
-                3 bước cho <em>suối tóc</em>
-                mềm mại
-            </h2>
-
-        </div>
-
-
-        <div class="routine-grid">
-
-            <div class="routine-card">
-
-                <span class="routine-number">
-                    01
-                </span>
-
-                <div class="routine-icon">
-                    ♡
-                </div>
-
-                <h3>
-                    Làm sạch
-                </h3>
-
-                <p>
-                    Bắt đầu với dầu gội Bưởi,
-                    nhẹ nhàng làm sạch mái tóc.
+                <p class="hero-slogan">
+                    Hãy để mái tóc kể câu chuyện
+                    của thiên nhiên.
                 </p>
 
-            </div>
 
-
-            <div class="routine-card">
-
-                <span class="routine-number">
-                    02
-                </span>
-
-                <div class="routine-icon">
-                    ✦
-                </div>
-
-                <h3>
-                    Dưỡng mềm
-                </h3>
-
-                <p>
-                    Tiếp nối bằng dầu xả để
-                    mái tóc thêm mềm mại.
+                <p class="hero-description">
+                    Khám phá dòng chăm sóc tóc Bưởi Cocoon
+                    với tinh dầu bưởi cùng những thành phần
+                    chăm sóc tóc được chọn lọc.
                 </p>
 
+
+                <div class="hero-actions">
+
+                    <a
+                        href="#products"
+                        class="button button-primary"
+                    >
+                        Khám phá sản phẩm
+                    </a>
+
+
+                    <a
+                        href="tel:0335459131"
+                        class="button button-outline"
+                    >
+                        Tư vấn ngay
+                    </a>
+
+                </div>
+
             </div>
 
 
-            <div class="routine-card">
+            <div class="hero-art">
 
-                <span class="routine-number">
-                    03
-                </span>
+                <div class="hero-circle">
 
-                <div class="routine-icon">
+                    <span class="hero-circle-small">
+                        BƯỞI
+                    </span>
+
+                    <strong>
+                        Cocoon
+                    </strong>
+
+                    <span>
+                        Hair Care
+                    </span>
+
+                </div>
+
+
+                <div class="hero-leaf leaf-one">
                     ❋
                 </div>
 
+                <div class="hero-leaf leaf-two">
+                    ❋
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PRODUCT INTRO
+         ===================================================== -->
+
+    <section class="intro-section">
+
+        <div class="container intro-grid">
+
+            <div class="intro-card">
+
+                <span class="intro-number">
+                    01
+                </span>
+
                 <h3>
-                    Yêu thương
+                    Tinh dầu bưởi
                 </h3>
 
                 <p>
-                    Dành một chút thời gian để
-                    nâng niu mái tóc mỗi ngày.
+                    Hương bưởi tươi mát,
+                    gợi nhớ nét tự nhiên thân thuộc
+                    của mái tóc Việt.
+                </p>
+
+            </div>
+
+
+            <div class="intro-card">
+
+                <span class="intro-number">
+                    02
+                </span>
+
+                <h3>
+                    Chăm sóc tóc
+                </h3>
+
+                <p>
+                    Kết hợp những thành phần
+                    hỗ trợ dưỡng ẩm và chăm sóc
+                    mái tóc mềm mại.
+                </p>
+
+            </div>
+
+
+            <div class="intro-card">
+
+                <span class="intro-number">
+                    03
+                </span>
+
+                <h3>
+                    Từ Việt Nam
+                </h3>
+
+                <p>
+                    Một câu chuyện làm đẹp
+                    gắn với nguyên liệu và cảm hứng
+                    thiên nhiên Việt Nam.
                 </p>
 
             </div>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =====================================================
-     TƯ VẤN
-===================================================== -->
 
-<section class="consult-section" id="tu-van">
+    <!-- =====================================================
+         PRODUCTS
+         ===================================================== -->
 
-    <div class="container consult-box">
+    <section
+        class="products-section section"
+        id="products"
+    >
 
-        <div class="consult-content">
+        <div class="container">
 
-            <span class="section-label">
-                TƯ VẤN CHĂM SÓC TÓC
-            </span>
+            <div class="section-heading">
 
-            <h2>
-                Bạn chưa biết chọn
-                sản phẩm nào?
-            </h2>
+                <span class="eyebrow">
+                    BỘ SƯU TẬP BƯỞI
+                </span>
 
-            <p>
-                Hãy để chúng tôi đồng hành cùng bạn.
-                Gọi ngay để được tư vấn về sản phẩm
-                phù hợp với nhu cầu chăm sóc mái tóc.
-            </p>
+                <h2>
+                    Chăm tóc thật dịu dàng
+                </h2>
 
-            <a href="tel:0335459131"
-               class="phone-number">
-                <span>☎</span>
-                0335 459 131
+                <p>
+                    Từ dầu gội, dầu xả đến túi refill
+                    và bộ đôi chăm sóc tóc.
+                </p>
+
+            </div>
+
+
+            <!-- SEARCH + FILTER -->
+
+            <div class="product-tools">
+
+                <div class="search-box">
+
+                    <span>
+                        ⌕
+                    </span>
+
+                    <input
+                        type="search"
+                        id="productSearch"
+                        placeholder="Tìm kiếm sản phẩm..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <div
+                    class="filter-list"
+                    id="filterList"
+                >
+
+                    <button
+                        class="filter-button active"
+                        type="button"
+                        data-category="all"
+                    >
+                        Tất cả
+                    </button>
+
+
+                    <button
+                        class="filter-button"
+                        type="button"
+                        data-category="dau-goi"
+                    >
+                        Dầu gội
+                    </button>
+
+
+                    <button
+                        class="filter-button"
+                        type="button"
+                        data-category="dau-xa"
+                    >
+                        Dầu xả
+                    </button>
+
+
+                    <button
+                        class="filter-button"
+                        type="button"
+                        data-category="combo"
+                    >
+                        Bộ đôi
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT GRID -->
+
+            <div
+                class="product-grid"
+                id="productGrid"
+            >
+                <!-- JavaScript render sản phẩm -->
+            </div>
+
+
+            <!-- EMPTY RESULT -->
+
+            <div
+                class="empty-result"
+                id="emptyResult"
+                hidden
+            >
+
+                <div class="empty-result-icon">
+                    ◌
+                </div>
+
+                <h3>
+                    Chưa tìm thấy sản phẩm
+                </h3>
+
+                <p>
+                    Hãy thử một tên sản phẩm hoặc danh mục khác.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STORY
+         ===================================================== -->
+
+    <section
+        class="story-section section"
+        id="story"
+    >
+
+        <div class="container story-grid">
+
+            <div class="story-visual">
+
+                <div class="story-circle">
+
+                    <span>
+                        NATURAL
+                    </span>
+
+                    <strong>
+                        Bưởi
+                    </strong>
+
+                    <span>
+                        VIỆT NAM
+                    </span>
+
+                </div>
+
+                <div class="story-decoration">
+                    ❋
+                </div>
+
+            </div>
+
+
+            <div class="story-content">
+
+                <span class="eyebrow">
+                    CÂU CHUYỆN MÁI TÓC
+                </span>
+
+                <h2>
+                    Dịu dàng từ những điều
+                    thân thuộc
+                </h2>
+
+                <p>
+                    Mái tóc đẹp không chỉ nằm ở vẻ ngoài.
+                    Đó còn là cảm giác sạch thoáng,
+                    mềm mại và hương thơm khiến bạn
+                    muốn chạm vào mái tóc của mình
+                    thêm một lần nữa.
+                </p>
+
+                <p>
+                    Lấy cảm hứng từ quả bưởi quen thuộc
+                    trong đời sống Việt Nam, dòng sản phẩm
+                    Bưởi Cocoon kết hợp tinh dầu bưởi
+                    cùng các thành phần chăm sóc tóc
+                    để tạo nên một chu trình chăm sóc
+                    nhẹ nhàng.
+                </p>
+
+
+                <div class="story-points">
+
+                    <div>
+                        <span>✓</span>
+                        <p>
+                            Tinh dầu bưởi
+                        </p>
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        <p>
+                            Vitamin B5
+                        </p>
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        <p>
+                            Xylishine™
+                        </p>
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        <p>
+                            Axít amin
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CONSULTATION
+         ===================================================== -->
+
+    <section
+        class="consultation-section"
+        id="consultation"
+    >
+
+        <div class="container consultation-inner">
+
+            <div>
+
+                <span class="eyebrow">
+                    BẠN ĐANG PHÂN VÂN?
+                </span>
+
+                <h2>
+                    Để chúng mình cùng
+                    chăm sóc mái tóc của bạn
+                </h2>
+
+                <p>
+                    Cần hỗ trợ lựa chọn sản phẩm?
+                    Hãy gọi để được tư vấn.
+                </p>
+
+            </div>
+
+
+            <a
+                href="tel:0335459131"
+                class="consultation-phone"
+            >
+
+                <span>
+                    TƯ VẤN
+                </span>
+
+                <strong>
+                    0335 459 131
+                </strong>
+
+                <small>
+                    Nhấn để gọi
+                </small>
+
             </a>
 
         </div>
 
-        <div class="consult-decoration">
-            <div class="leaf leaf-1"></div>
-            <div class="leaf leaf-2"></div>
-            <div class="leaf leaf-3"></div>
+    </section>
+
+
+
+    <!-- =====================================================
+         ORDER
+         ===================================================== -->
+
+    <section
+        class="order-section section"
+        id="order"
+    >
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="eyebrow">
+                    ĐẶT HÀNG
+                </span>
+
+                <h2>
+                    Gửi sản phẩm về nhà
+                </h2>
+
+                <p>
+                    Kiểm tra giỏ hàng và điền thông tin
+                    nhận hàng bên dưới.
+                </p>
+
+            </div>
+
+
+            <div class="order-layout">
+
+
+                <!-- ORDER SUMMARY -->
+
+                <div class="order-summary-card">
+
+                    <div class="order-card-heading">
+
+                        <h3>
+                            Sản phẩm đã chọn
+                        </h3>
+
+                        <span id="orderItemCount">
+                            0 sản phẩm
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="order-summary-list"
+                        id="orderSummaryList"
+                    >
+
+                        <div class="order-empty">
+                            <span>🛍</span>
+
+                            <p>
+                                Giỏ hàng đang trống.
+                            </p>
+
+                            <a href="#products">
+                                Chọn sản phẩm
+                            </a>
+                        </div>
+
+                    </div>
+
+
+                    <div class="order-summary-total">
+
+                        <span>
+                            Tổng cộng
+                        </span>
+
+                        <strong id="orderTotal">
+                            0 VNĐ
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ORDER FORM -->
+
+                <div class="order-form-card">
+
+                    <div class="order-card-heading">
+
+                        <h3>
+                            Thông tin nhận hàng
+                        </h3>
+
+                        <span>
+                            * Bắt buộc
+                        </span>
+
+                    </div>
+
+
+                    <form
+                        id="orderForm"
+                        novalidate
+                    >
+
+                        <div class="form-group">
+
+                            <label for="customerName">
+                                Họ và tên *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="customerName"
+                                name="customerName"
+                                placeholder="Nhập họ và tên"
+                                required
+                            >
+
+                            <small
+                                class="form-error"
+                                data-error-for="customerName"
+                            ></small>
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="customerPhone">
+                                    Số điện thoại *
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="customerPhone"
+                                    name="customerPhone"
+                                    placeholder="0335 459 131"
+                                    inputmode="tel"
+                                    required
+                                >
+
+                                <small
+                                    class="form-error"
+                                    data-error-for="customerPhone"
+                                ></small>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="customerEmail">
+                                    Email
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="customerEmail"
+                                    name="customerEmail"
+                                    placeholder="email@example.com"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="customerAddress">
+                                Địa chỉ nhận hàng *
+                            </label>
+
+                            <textarea
+                                id="customerAddress"
+                                name="customerAddress"
+                                rows="4"
+                                placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành..."
+                                required
+                            ></textarea>
+
+                            <small
+                                class="form-error"
+                                data-error-for="customerAddress"
+                            ></small>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="paymentMethod">
+                                Phương thức thanh toán
+                            </label>
+
+                            <select
+                                id="paymentMethod"
+                                name="paymentMethod"
+                            >
+
+                                <option value="cod">
+                                    Thanh toán khi nhận hàng
+                                </option>
+
+                                <option value="bank">
+                                    Chuyển khoản ngân hàng
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="customerNote">
+                                Ghi chú
+                            </label>
+
+                            <textarea
+                                id="customerNote"
+                                name="customerNote"
+                                rows="3"
+                                placeholder="Ghi chú thêm cho đơn hàng..."
+                            ></textarea>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="button button-primary button-full"
+                        >
+                            Xác nhận đặt hàng
+                        </button>
+
+
+                        <p class="order-note">
+                            Thông tin đơn hàng sẽ được dùng
+                            để liên hệ xác nhận với bạn.
+                        </p>
+
+                    </form>
+
+
+                    <!-- SUCCESS -->
+
+                    <div
+                        class="order-success"
+                        id="orderSuccess"
+                        hidden
+                    >
+
+                        <div class="success-icon">
+                            ✓
+                        </div>
+
+                        <h3>
+                            Đặt hàng thành công
+                        </h3>
+
+                        <p id="successMessage">
+                            Cảm ơn bạn đã lựa chọn sản phẩm.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="button button-outline"
+                            id="continueShoppingButton"
+                        >
+                            Tiếp tục mua sắm
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     ĐẶT HÀNG
-===================================================== -->
-
-<section class="order-section" id="dat-hang">
-
-    <div class="container order-grid">
-
-        <div class="order-intro">
-
-            <span class="section-label">
-                ĐẶT HÀNG
-            </span>
-
-            <h2>
-                Gửi mái tóc<br>
-                một chút <em>yêu thương</em>
-            </h2>
-
-            <p>
-                Chọn sản phẩm bạn yêu thích,
-                điền thông tin nhận hàng và chúng tôi
-                sẽ liên hệ xác nhận đơn hàng.
-            </p>
-
-            <div class="order-note">
-                <strong>☎ Tư vấn:</strong>
-                0335 459 131
-            </div>
-
-        </div>
-
-
-        <form class="order-form"
-              onsubmit="submitOrder(event)">
-
-            <div class="form-row">
-
-                <div class="form-group">
-
-                    <label>
-                        Họ và tên
-                    </label>
-
-                    <input type="text"
-                           id="customerName"
-                           placeholder="Nhập họ và tên"
-                           required>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-                        Số điện thoại
-                    </label>
-
-                    <input type="tel"
-                           id="customerPhone"
-                           placeholder="Nhập số điện thoại"
-                           required>
-
-                </div>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Địa chỉ nhận hàng
-                </label>
-
-                <input type="text"
-                       id="customerAddress"
-                       placeholder="Số nhà, đường, phường/xã..."
-                       required>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Sản phẩm
-                </label>
-
-                <select id="orderProduct" required>
-
-                    <option value="">
-                        -- Chọn sản phẩm --
-                    </option>
-
-                    <option>
-                        Dầu gội Bưởi Cocoon
-                    </option>
-
-                    <option>
-                        Dầu xả Bưởi Cocoon
-                    </option>
-
-                    <option>
-                        Túi refill dầu gội Bưởi
-                    </option>
-
-                    <option>
-                        Túi refill dầu xả Bưởi
-                    </option>
-
-                    <option>
-                        Combo dầu gội & dầu xả Bưởi
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-row">
-
-                <div class="form-group">
-
-                    <label>
-                        Số lượng
-                    </label>
-
-                    <input type="number"
-                           id="orderQuantity"
-                           value="1"
-                           min="1"
-                           required>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-                        Ghi chú
-                    </label>
-
-                    <input type="text"
-                           id="orderNote"
-                           placeholder="Ghi chú đơn hàng">
-
-                </div>
-
-            </div>
-
-
-            <button type="submit"
-                    class="btn btn-submit">
-                Gửi yêu cầu đặt hàng
-            </button>
-
-            <p class="form-message"
-               id="formMessage"></p>
-
-        </form>
-
-    </div>
-
-</section>
+    </section>
 
 </main>
 
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
 
-<footer class="footer">
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer class="site-footer">
 
     <div class="container footer-grid">
 
+
         <div class="footer-brand">
 
-            <a href="#trang-chu" class="logo footer-logo">
-                <span class="logo-small">Nâng niu</span>
-                <span class="logo-main">mái tóc Việt</span>
+            <a
+                href="#home"
+                class="brand footer-logo"
+            >
+
+                <span class="brand-leaf">
+                    ❋
+                </span>
+
+                <span class="brand-text">
+
+                    <strong>
+                        Nâng niu
+                    </strong>
+
+                    <span>
+                        mái tóc Việt
+                    </span>
+
+                </span>
+
             </a>
+
 
             <p>
                 Suối tóc thanh xuân gội từ đất mẹ.
@@ -974,20 +977,16 @@
                 Khám phá
             </h4>
 
-            <a href="#trang-chu">
+            <a href="#home">
                 Trang chủ
             </a>
 
-            <a href="#san-pham">
+            <a href="#products">
                 Sản phẩm
             </a>
 
-            <a href="#cau-chuyen">
+            <a href="#story">
                 Câu chuyện
-            </a>
-
-            <a href="#tu-van">
-                Tư vấn
             </a>
 
         </div>
@@ -996,23 +995,19 @@
         <div class="footer-column">
 
             <h4>
-                Sản phẩm
+                Hỗ trợ
             </h4>
 
-            <a href="#san-pham">
-                Dầu gội Bưởi
+            <a href="#consultation">
+                Tư vấn
             </a>
 
-            <a href="#san-pham">
-                Dầu xả Bưởi
+            <a href="#order">
+                Đặt hàng
             </a>
 
-            <a href="#san-pham">
-                Túi refill
-            </a>
-
-            <a href="#san-pham">
-                Combo Bưởi
+            <a href="#products">
+                Danh mục
             </a>
 
         </div>
@@ -1028,12 +1023,8 @@
                 0335 459 131
             </a>
 
-            <a href="#dat-hang">
-                Đặt hàng
-            </a>
-
             <span>
-                Tư vấn mỗi ngày
+                Tư vấn sản phẩm
             </span>
 
         </div>
@@ -1045,13 +1036,13 @@
 
         <div class="container">
 
-            <span>
-                © 2026 Nâng niu mái tóc Việt
-            </span>
+            <p>
+                © 2026 Nâng niu mái tóc Việt.
+            </p>
 
-            <span>
-                Chăm sóc mái tóc từ những điều tự nhiên
-            </span>
+            <p>
+                Chăm sóc mái tóc bằng cảm hứng từ thiên nhiên.
+            </p>
 
         </div>
 
@@ -1060,507 +1051,338 @@
 </footer>
 
 
-<!-- =====================================================
-     CART SIDEBAR
-===================================================== -->
 
-<div class="cart-overlay"
-     id="cartOverlay"
-     onclick="closeCart()">
-</div>
+<!-- =========================================================
+     CART OVERLAY
+     ========================================================= -->
+
+<div
+    class="cart-overlay"
+    id="cartOverlay"
+    aria-hidden="true"
+></div>
 
 
-<aside class="cart-sidebar"
-       id="cartSidebar">
 
-    <div class="cart-header">
+<!-- =========================================================
+     CART DRAWER
+     ========================================================= -->
+
+<aside
+    class="cart-drawer"
+    id="cartDrawer"
+    aria-hidden="true"
+>
+
+    <div class="cart-drawer-header">
 
         <div>
-            <span class="section-label">
-                GIỎ HÀNG
+
+            <span class="eyebrow">
+                CỦA BẠN
             </span>
 
             <h2>
-                Món quà cho tóc
+                Giỏ hàng
             </h2>
+
         </div>
 
-        <button class="close-cart"
-                onclick="closeCart()">
+
+        <button
+            type="button"
+            class="drawer-close"
+            id="closeCartButton"
+            aria-label="Đóng giỏ hàng"
+        >
             ×
         </button>
 
     </div>
 
 
-    <div class="cart-items"
-         id="cartItems">
-
-        <div class="empty-cart">
-
-            <div class="empty-icon">
-                🛒
-            </div>
-
-            <p>
-                Giỏ hàng đang trống.
-            </p>
-
-            <a href="#san-pham"
-               onclick="closeCart()"
-               class="btn btn-primary">
-                Xem sản phẩm
-            </a>
-
-        </div>
-
+    <div
+        class="cart-items"
+        id="cartItems"
+    >
+        <!-- JavaScript render -->
     </div>
 
 
-    <div class="cart-footer">
+    <div class="cart-drawer-footer">
 
-        <div class="cart-total">
+        <div class="cart-total-row">
 
             <span>
                 Tổng cộng
             </span>
 
             <strong id="cartTotal">
-                0₫
+                0 VNĐ
             </strong>
 
         </div>
 
-        <button class="btn btn-submit"
-                onclick="goToOrder()">
+
+        <button
+            type="button"
+            class="button button-primary button-full"
+            id="cartCheckoutButton"
+        >
             Tiến hành đặt hàng
         </button>
 
-        <a href="tel:0335459131"
-           class="cart-phone">
-            ☎ Tư vấn: 0335 459 131
-        </a>
+
+        <button
+            type="button"
+            class="clear-cart-button"
+            id="clearCartButton"
+        >
+            Xóa toàn bộ giỏ hàng
+        </button>
 
     </div>
 
 </aside>
 
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
 
-<script>
+<!-- =========================================================
+     PRODUCT DETAIL MODAL
+     ========================================================= -->
 
-const products = {
+<div
+    class="product-modal"
+    id="productModal"
+    aria-hidden="true"
+>
 
-    1: {
-        name: "Dầu gội Bưởi Cocoon",
-        price: 195000
-    },
-
-    2: {
-        name: "Dầu xả Bưởi Cocoon",
-        price: 195000
-    },
-
-    3: {
-        name: "Túi refill dầu gội Bưởi",
-        price: 165000
-    },
-
-    4: {
-        name: "Túi refill dầu xả Bưởi",
-        price: 165000
-    },
-
-    5: {
-        name: "Combo dầu gội & dầu xả Bưởi Cocoon",
-        price: 365000
-    }
-
-};
+    <div class="product-modal-backdrop"></div>
 
 
-let cart = [];
+    <div
+        class="product-modal-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalProductName"
+    >
+
+        <button
+            type="button"
+            class="modal-close"
+            id="closeProductModal"
+            aria-label="Đóng"
+        >
+            ×
+        </button>
 
 
-/* ===============================
-   FORMAT TIỀN
-================================ */
-
-function formatPrice(price) {
-
-    return new Intl.NumberFormat("vi-VN", {
-        style: "currency",
-        currency: "VND"
-    }).format(price);
-
-}
+        <div class="modal-layout">
 
 
-/* ===============================
-   THÊM SẢN PHẨM
-================================ */
+            <!-- MODAL IMAGE -->
 
-function addToCart(id) {
+            <div class="modal-image-area">
 
-    const product = products[id];
+                <div class="modal-image-frame">
 
-    const existing = cart.find(item => item.id === id);
+                    <img
+                        id="modalProductImage"
+                        src=""
+                        alt=""
+                    >
 
-    if (existing) {
-
-        existing.quantity++;
-
-    } else {
-
-        cart.push({
-            id: id,
-            name: product.name,
-            price: product.price,
-            quantity: 1
-        });
-
-    }
-
-    updateCart();
-
-    openCart();
-
-}
-
-
-/* ===============================
-   CẬP NHẬT GIỎ HÀNG
-================================ */
-
-function updateCart() {
-
-    const cartItems = document.getElementById("cartItems");
-
-    const cartCount = document.getElementById("cartCount");
-
-    const cartTotal = document.getElementById("cartTotal");
-
-
-    if (cart.length === 0) {
-
-        cartItems.innerHTML = `
-
-            <div class="empty-cart">
-
-                <div class="empty-icon">
-                    🛒
                 </div>
-
-                <p>
-                    Giỏ hàng đang trống.
-                </p>
-
-                <a href="#san-pham"
-                   onclick="closeCart()"
-                   class="btn btn-primary">
-                    Xem sản phẩm
-                </a>
 
             </div>
 
-        `;
 
-        cartCount.textContent = "0";
+            <!-- MODAL INFORMATION -->
 
-        cartTotal.textContent = "0₫";
+            <div class="modal-information">
 
-        return;
-
-    }
-
-
-    let total = 0;
-
-    let count = 0;
+                <span
+                    class="modal-category"
+                    id="modalProductCategory"
+                >
+                </span>
 
 
-    cartItems.innerHTML = cart.map(item => {
-
-        const itemTotal = item.price * item.quantity;
-
-        total += itemTotal;
-
-        count += item.quantity;
+                <h2
+                    id="modalProductName"
+                >
+                </h2>
 
 
-        return `
-
-            <div class="cart-item">
-
-                <div class="cart-item-image">
-                    ✿
+                <div
+                    class="modal-price"
+                    id="modalProductPrice"
+                >
                 </div>
 
-                <div class="cart-item-info">
 
-                    <h3>
-                        ${item.name}
-                    </h3>
+                <p
+                    class="modal-description"
+                    id="modalProductDescription"
+                >
+                </p>
 
-                    <strong>
-                        ${formatPrice(item.price)}
-                    </strong>
 
-                    <div class="quantity-control">
+                <!-- QUICK INFO -->
 
-                        <button onclick="changeQuantity(${item.id}, -1)">
-                            −
-                        </button>
+                <div class="quick-info-grid">
+
+                    <div class="quick-info-item">
 
                         <span>
-                            ${item.quantity}
+                            Lượng dùng
                         </span>
 
-                        <button onclick="changeQuantity(${item.id}, 1)">
-                            +
-                        </button>
+                        <strong id="modalProductDosage">
+                        </strong>
+
+                    </div>
+
+
+                    <div class="quick-info-item">
+
+                        <span>
+                            Kết cấu
+                        </span>
+
+                        <strong id="modalProductTexture">
+                        </strong>
+
+                    </div>
+
+
+                    <div class="quick-info-item">
+
+                        <span>
+                            Mùi hương
+                        </span>
+
+                        <strong id="modalProductScent">
+                        </strong>
+
+                    </div>
+
+
+                    <div class="quick-info-item">
+
+                        <span>
+                            Xuất xứ
+                        </span>
+
+                        <strong id="modalProductOrigin">
+                        </strong>
 
                     </div>
 
                 </div>
 
-                <button class="remove-item"
-                        onclick="removeFromCart(${item.id})">
-                    ×
-                </button>
+
+                <!-- USAGE -->
+
+                <div class="detail-block">
+
+                    <h3>
+                        Cách sử dụng
+                    </h3>
+
+                    <div
+                        id="modalProductUsage"
+                        class="usage-content"
+                    >
+                    </div>
+
+                </div>
+
+
+                <!-- INGREDIENTS -->
+
+                <div class="detail-block">
+
+                    <h3>
+                        Thành phần chính
+                    </h3>
+
+                    <div
+                        id="modalProductIngredients"
+                        class="ingredients-list"
+                    >
+                    </div>
+
+                </div>
+
+
+                <!-- NOTE -->
+
+                <div class="detail-block note-block">
+
+                    <h3>
+                        Lưu ý
+                    </h3>
+
+                    <p
+                        id="modalProductNote"
+                    >
+                    </p>
+
+                </div>
+
+
+                <!-- MODAL ACTION -->
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="button button-primary"
+                        id="modalAddToCart"
+                    >
+                        Thêm vào giỏ hàng
+                    </button>
+
+
+                    <a
+                        href="tel:0335459131"
+                        class="button button-outline"
+                    >
+                        Tư vấn
+                    </a>
+
+                </div>
 
             </div>
 
-        `;
+        </div>
 
-    }).join("");
+    </div>
 
+</div>
 
-    cartCount.textContent = count;
 
-    cartTotal.textContent = formatPrice(total);
 
-}
+<!-- =========================================================
+     TOAST
+     ========================================================= -->
 
+<div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+>
+</div>
 
-/* ===============================
-   THAY ĐỔI SỐ LƯỢNG
-================================ */
 
-function changeQuantity(id, change) {
 
-    const item = cart.find(item => item.id === id);
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
 
-    if (!item) return;
-
-    item.quantity += change;
-
-    if (item.quantity <= 0) {
-
-        cart = cart.filter(item => item.id !== id);
-
-    }
-
-    updateCart();
-
-}
-
-
-/* ===============================
-   XÓA SẢN PHẨM
-================================ */
-
-function removeFromCart(id) {
-
-    cart = cart.filter(item => item.id !== id);
-
-    updateCart();
-
-}
-
-
-/* ===============================
-   MỞ GIỎ
-================================ */
-
-function openCart() {
-
-    document.getElementById("cartSidebar")
-        .classList.add("active");
-
-    document.getElementById("cartOverlay")
-        .classList.add("active");
-
-    document.body.classList.add("no-scroll");
-
-}
-
-
-/* ===============================
-   ĐÓNG GIỎ
-================================ */
-
-function closeCart() {
-
-    document.getElementById("cartSidebar")
-        .classList.remove("active");
-
-    document.getElementById("cartOverlay")
-        .classList.remove("active");
-
-    document.body.classList.remove("no-scroll");
-
-}
-
-
-/* ===============================
-   LỌC SẢN PHẨM
-================================ */
-
-function filterProducts(category, button) {
-
-    const productCards =
-        document.querySelectorAll(".product-card");
-
-    const buttons =
-        document.querySelectorAll(".category-btn");
-
-
-    buttons.forEach(btn => {
-        btn.classList.remove("active");
-    });
-
-    button.classList.add("active");
-
-
-    productCards.forEach(card => {
-
-        if (
-            category === "all" ||
-            card.dataset.category === category
-        ) {
-
-            card.style.display = "";
-
-            setTimeout(() => {
-                card.classList.add("show");
-            }, 10);
-
-        } else {
-
-            card.classList.remove("show");
-
-            card.style.display = "none";
-
-        }
-
-    });
-
-}
-
-
-/* ===============================
-   ĐI ĐẾN ĐẶT HÀNG
-================================ */
-
-function goToOrder() {
-
-    closeCart();
-
-    document.getElementById("dat-hang")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-
-}
-
-
-/* ===============================
-   ĐẶT HÀNG
-================================ */
-
-function submitOrder(event) {
-
-    event.preventDefault();
-
-
-    const name =
-        document.getElementById("customerName").value;
-
-    const phone =
-        document.getElementById("customerPhone").value;
-
-    const address =
-        document.getElementById("customerAddress").value;
-
-    const product =
-        document.getElementById("orderProduct").value;
-
-    const quantity =
-        document.getElementById("orderQuantity").value;
-
-    const note =
-        document.getElementById("orderNote").value;
-
-
-    const message =
-        document.getElementById("formMessage");
-
-
-    message.className =
-        "form-message success";
-
-    message.innerHTML = `
-
-        Cảm ơn <strong>${name}</strong>!
-        Yêu cầu đặt hàng của bạn đã được ghi nhận.
-        Chúng tôi sẽ liên hệ với bạn qua số
-        <strong>${phone}</strong> để xác nhận đơn hàng.
-
-    `;
-
-
-    console.log({
-        name,
-        phone,
-        address,
-        product,
-        quantity,
-        note
-    });
-
-}
-
-
-/* ===============================
-   ESC ĐÓNG GIỎ
-================================ */
-
-document.addEventListener("keydown", function(event) {
-
-    if (event.key === "Escape") {
-
-        closeCart();
-
-    }
-
-});
-
-
-/* ===============================
-   KHỞI TẠO
-================================ */
-
-document.addEventListener("DOMContentLoaded", function() {
-
-    updateCart();
-
-});
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
