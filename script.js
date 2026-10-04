@@ -290,13 +290,13 @@ const products = [
     {
         id: 5,
 
-        name: "Combo Dầu gội & Dầu xả Bưởi Cocoon 310ml x 2",
+        name: "Bội đôi Dầu gội & Dầu xả Bưởi Cocoon 310ml x 2",
 
-        shortName: "Combo Dầu gội & Dầu xả Bưởi",
+        shortName: "Bộ đôi Dầu gội & Dầu xả Bưởi",
 
         category: "bo-doi",
 
-        categoryName: "Combo",
+        categoryName: "Bộ đôi",
 
         price: 590000,
 
