@@ -1,47 +1,86 @@
 /* =========================================================
    NÂNG NIU MÁI TÓC VIỆT
    script.js
-   ---------------------------------------------------------
+
    Chức năng:
-   1. Dữ liệu 5 sản phẩm Cocoon Bưởi
-   2. Hiển thị sản phẩm
-   3. Lọc sản phẩm
-   4. Tìm kiếm sản phẩm
-   5. Xem chi tiết sản phẩm
-   6. Thêm sản phẩm vào giỏ hàng
-   7. Tăng / giảm số lượng
-   8. Xóa sản phẩm khỏi giỏ
-   9. Tính tổng tiền
-   10. Lưu giỏ hàng bằng localStorage
+   - Dữ liệu sản phẩm
+   - Tìm kiếm
+   - Tìm kiếm không dấu
+   - Lọc danh mục
+   - Chi tiết sản phẩm
+   - Giỏ hàng
+   - Tăng / giảm số lượng
+   - Xóa sản phẩm
+   - LocalStorage
+   - Tóm tắt đơn hàng
+   - Form đặt hàng
+   - Menu mobile
    ========================================================= */
 
 
 /* =========================================================
-   1. DỮ LIỆU SẢN PHẨM
+   1. CẤU HÌNH
+   ========================================================= */
+
+const CONFIG = {
+
+    storageKey:
+        "nangNiuMaiTocVietCart",
+
+    currency:
+        "VNĐ",
+
+    hotline:
+        "0335459131"
+
+};
+
+
+/* =========================================================
+   2. DỮ LIỆU SẢN PHẨM
    ========================================================= */
 
 const products = [
 
+    /* =====================================================
+       SẢN PHẨM 01
+       ===================================================== */
+
     {
         id: 1,
 
-        name: "Dầu Gội Bưởi Cocoon 500ml",
+        name:
+            "Dầu Gội Bưởi Cocoon 500ml",
 
-        shortName: "Dầu gội Bưởi 500ml",
+        slug:
+            "dau-goi-buoi-cocoon-500ml",
 
-        category: "dau-goi",
+        category:
+            "dau-goi",
 
-        categoryName: "Dầu gội",
+        categoryName:
+            "Dầu gội",
 
-        price: 388000,
+        volume:
+            "500ml",
 
-        volume: "500ml",
+        price:
+            388000,
 
         image:
             "https://image.cocoonvietnam.com/uploads/IMG_5252_8f3fe2deab.jpg",
 
         description:
-            "Dầu Gội Bưởi Cocoon với tinh dầu bưởi, Vitamin B5, Xylishine™ và axít amin, giúp làm sạch tóc và chăm sóc mái tóc mềm mượt, bóng khỏe.",
+            "Dầu Gội Bưởi Cocoon với tinh dầu bưởi, Xylishine™, Vitamin B5 và axít amin, mang đến trải nghiệm làm sạch và chăm sóc tóc với hương tinh dầu bưởi thơm mát.",
+
+        usage: [
+            "Thoa sản phẩm lên tóc ướt và tạo bọt, mát-xa nhẹ nhàng từ gốc đến ngọn, sau đó gội sạch.",
+
+            "Sử dụng hằng ngày để có kết quả tốt nhất. Tránh tiếp xúc với mắt."
+        ],
+
+        dosage:
+            "Từ 1–2 lần nhấn",
 
         texture:
             "Dạng gel trong mờ",
@@ -49,72 +88,90 @@ const products = [
         scent:
             "Mùi tinh dầu bưởi thơm mát",
 
-        usage:
-            "Thoa sản phẩm lên tóc ướt và tạo bọt. Mát-xa nhẹ nhàng từ gốc đến ngọn, sau đó gội sạch với nước. Sử dụng hằng ngày để có kết quả tốt nhất.",
-
-        dosage:
-            "Từ 1–2 lần nhấn",
+        note:
+            "Tránh dùng vùng mắt, chỉ dùng ngoài da.",
 
         origin:
             "Việt Nam",
 
-        note:
-            "Tránh tiếp xúc với mắt. Chỉ dùng ngoài da.",
-
         ingredients: [
 
             {
-                name: "Tinh dầu bưởi",
+                name:
+                    "Tinh dầu bưởi",
 
-                content:
-                    "Được trích ly từ vỏ bưởi, chứa hàm lượng lớn limonene. Tinh dầu vỏ bưởi có đặc tính kháng khuẩn và chống oxy hóa, góp phần chăm sóc da đầu và tóc."
+                description:
+                    "Được trích ly từ vỏ bưởi, chứa hàm lượng lớn limonene. Thành phần này được mô tả với đặc tính kháng khuẩn và chống oxy hóa, góp phần chăm sóc da đầu và tóc."
             },
 
             {
-                name: "Xylishine™",
+                name:
+                    "Xylishine™",
 
-                content:
+                description:
                     "Được chiết xuất từ tảo nâu Pelvetia canaliculata và các loại đường tự nhiên có trong gỗ. Có chức năng dưỡng ẩm và phục hồi tóc, giúp tăng cường độ bóng."
             },
 
             {
-                name: "Vitamin B5 (D-panthenol)",
+                name:
+                    "Vitamin B5 (D-panthenol)",
 
-                content:
-                    "Giúp cung cấp độ ẩm lâu dài cho tóc, hỗ trợ hạn chế hư tổn, cải thiện độ bóng và vẻ khỏe của mái tóc."
+                description:
+                    "Có chức năng như một tác nhân dưỡng tóc, hỗ trợ cung cấp độ ẩm lâu dài cho tóc, hạn chế hư tổn và cải thiện độ bóng khỏe của mái tóc."
             },
 
             {
-                name: "Axít amin",
+                name:
+                    "Axít amin",
 
-                content:
-                    "Giúp dưỡng ẩm, củng cố cấu trúc tóc, hỗ trợ bảo vệ màu sắc và sửa chữa các hư hỏng trên bề mặt tóc."
+                description:
+                    "Hỗ trợ dưỡng ẩm, củng cố cấu trúc, bảo vệ màu sắc và chăm sóc những hư hỏng trên bề mặt tóc."
             }
 
         ]
+
     },
 
+
+    /* =====================================================
+       SẢN PHẨM 02
+       ===================================================== */
 
     {
         id: 2,
 
-        name: "Dầu Gội Bưởi Cocoon 310ml",
+        name:
+            "Dầu Gội Bưởi Cocoon 310ml",
 
-        shortName: "Dầu gội Bưởi 310ml",
+        slug:
+            "dau-goi-buoi-cocoon-310ml",
 
-        category: "dau-goi",
+        category:
+            "dau-goi",
 
-        categoryName: "Dầu gội",
+        categoryName:
+            "Dầu gội",
 
-        price: 200000,
+        volume:
+            "310ml",
 
-        volume: "310ml",
+        price:
+            200000,
 
         image:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaO9qvYFAEuGH2AkFhsus8McXksD5--YRyhFYcsqTdwg&s=10",
 
         description:
-            "Dầu Gội Bưởi Cocoon phiên bản 310ml với tinh dầu bưởi và các hoạt chất dưỡng tóc, mang đến cảm giác sạch thoáng cùng hương bưởi tươi mát.",
+            "Dầu Gội Bưởi Cocoon 310ml mang hương tinh dầu bưởi thơm mát, kết hợp các thành phần chăm sóc tóc như Xylishine™, Vitamin B5 và axít amin.",
+
+        usage: [
+            "Thoa sản phẩm lên tóc ướt và tạo bọt, mát-xa nhẹ nhàng từ gốc đến ngọn, sau đó gội sạch.",
+
+            "Sử dụng hằng ngày để có kết quả tốt nhất. Tránh tiếp xúc với mắt."
+        ],
+
+        dosage:
+            "Từ 1–2 lần nhấn",
 
         texture:
             "Dạng gel trong mờ",
@@ -122,72 +179,90 @@ const products = [
         scent:
             "Mùi tinh dầu bưởi thơm mát",
 
-        usage:
-            "Thoa sản phẩm lên tóc ướt và tạo bọt. Mát-xa nhẹ nhàng từ gốc đến ngọn rồi gội sạch với nước. Sử dụng hằng ngày để có kết quả tốt nhất.",
-
-        dosage:
-            "Từ 1–2 lần nhấn",
+        note:
+            "Tránh dùng vùng mắt, chỉ dùng ngoài da.",
 
         origin:
             "Việt Nam",
 
-        note:
-            "Tránh tiếp xúc với mắt. Chỉ dùng ngoài da.",
-
         ingredients: [
 
             {
-                name: "Tinh dầu bưởi",
+                name:
+                    "Tinh dầu bưởi",
 
-                content:
-                    "Chiết xuất từ vỏ bưởi, giàu limonene và có đặc tính kháng khuẩn, chống oxy hóa, góp phần chăm sóc da đầu và mái tóc."
+                description:
+                    "Được trích ly từ vỏ bưởi và chứa limonene. Tinh dầu vỏ bưởi được sử dụng trong sản phẩm với đặc tính kháng khuẩn và chống oxy hóa."
             },
 
             {
-                name: "Xylishine™",
+                name:
+                    "Xylishine™",
 
-                content:
-                    "Hỗ trợ dưỡng ẩm và phục hồi tóc, giúp mái tóc trở nên mềm mại và tăng độ bóng."
+                description:
+                    "Hỗ trợ dưỡng ẩm và phục hồi tóc, góp phần tăng độ bóng cho mái tóc."
             },
 
             {
-                name: "Vitamin B5",
+                name:
+                    "Vitamin B5 (D-panthenol)",
 
-                content:
-                    "Hỗ trợ cung cấp độ ẩm lâu dài, giúp tóc mềm mại và cải thiện vẻ bóng khỏe."
+                description:
+                    "Hỗ trợ cung cấp độ ẩm cho tóc và cải thiện vẻ bóng khỏe của mái tóc."
             },
 
             {
-                name: "Axít amin",
+                name:
+                    "Axít amin",
 
-                content:
-                    "Giúp dưỡng ẩm, củng cố cấu trúc và hỗ trợ bảo vệ bề mặt tóc."
+                description:
+                    "Hỗ trợ dưỡng ẩm và củng cố cấu trúc bề mặt tóc."
             }
 
         ]
+
     },
 
+
+    /* =====================================================
+       SẢN PHẨM 03
+       ===================================================== */
 
     {
         id: 3,
 
-        name: "Túi Refill Dầu Gội Bưởi Cocoon",
+        name:
+            "Túi Refill Dầu Gội Bưởi Cocoon",
 
-        shortName: "Túi Refill Dầu Gội Bưởi",
+        slug:
+            "tui-refill-dau-goi-buoi",
 
-        category: "refill",
+        category:
+            "dau-goi",
 
-        categoryName: "Túi Refill",
+        categoryName:
+            "Dầu gội",
 
-        price: 310000,
+        volume:
+            "Túi Refill",
 
-        volume: "Refill",
+        price:
+            310000,
 
         image:
             "https://cdn.hstatic.net/products/1000006063/new_project_4f782c61380f46bc8013b609d3849d29_1024x1024.jpg",
 
         description:
-            "Túi Refill Dầu Gội Bưởi Cocoon là lựa chọn tiện lợi để bổ sung dầu gội vào chai đang sử dụng, giúp hạn chế việc mua lại chai mới.",
+            "Túi Refill Dầu Gội Bưởi Cocoon giúp bổ sung sản phẩm vào chai đang sử dụng, mang đến lựa chọn tiện lợi cho chu trình chăm sóc tóc.",
+
+        usage: [
+            "Đổ sản phẩm từ túi refill vào chai sạch và khô.",
+
+            "Khi sử dụng, thoa sản phẩm lên tóc ướt, tạo bọt và mát-xa nhẹ nhàng từ gốc đến ngọn, sau đó gội sạch."
+        ],
+
+        dosage:
+            "Từ 1–2 lần nhấn",
 
         texture:
             "Dạng gel trong mờ",
@@ -195,72 +270,90 @@ const products = [
         scent:
             "Mùi tinh dầu bưởi thơm mát",
 
-        usage:
-            "Đổ sản phẩm từ túi refill vào chai sạch và khô. Khi sử dụng, thoa sản phẩm lên tóc ướt, tạo bọt và mát-xa nhẹ nhàng từ gốc đến ngọn rồi xả sạch.",
-
-        dosage:
-            "Từ 1–2 lần nhấn",
+        note:
+            "Tránh dùng vùng mắt, chỉ dùng ngoài da.",
 
         origin:
             "Việt Nam",
 
-        note:
-            "Tránh tiếp xúc với mắt. Chỉ dùng ngoài da.",
-
         ingredients: [
 
             {
-                name: "Tinh dầu bưởi",
+                name:
+                    "Tinh dầu bưởi",
 
-                content:
-                    "Được chiết xuất từ vỏ bưởi, mang hương thơm đặc trưng và có đặc tính kháng khuẩn, chống oxy hóa."
+                description:
+                    "Được trích ly từ vỏ bưởi, chứa limonene và có đặc tính kháng khuẩn, chống oxy hóa theo mô tả thành phần."
             },
 
             {
-                name: "Xylishine™",
+                name:
+                    "Xylishine™",
 
-                content:
-                    "Hỗ trợ dưỡng ẩm và phục hồi tóc, giúp tăng độ mềm mại và độ bóng."
+                description:
+                    "Hỗ trợ dưỡng ẩm và phục hồi tóc, góp phần tăng độ bóng."
             },
 
             {
-                name: "Vitamin B5",
+                name:
+                    "Vitamin B5 (D-panthenol)",
 
-                content:
-                    "Hỗ trợ giữ ẩm và chăm sóc tóc, giúp mái tóc có vẻ mềm mại và khỏe hơn."
+                description:
+                    "Hỗ trợ dưỡng ẩm lâu dài và chăm sóc mái tóc."
             },
 
             {
-                name: "Axít amin",
+                name:
+                    "Axít amin",
 
-                content:
-                    "Giúp dưỡng ẩm, củng cố cấu trúc và chăm sóc bề mặt tóc."
+                description:
+                    "Hỗ trợ dưỡng ẩm và củng cố cấu trúc bề mặt tóc."
             }
 
         ]
+
     },
 
+
+    /* =====================================================
+       SẢN PHẨM 04
+       ===================================================== */
 
     {
         id: 4,
 
-        name: "Dầu Xả Bưởi Cocoon 310ml",
+        name:
+            "Dầu Xả Bưởi Cocoon 310ml",
 
-        shortName: "Dầu xả Bưởi 310ml",
+        slug:
+            "dau-xa-buoi-cocoon-310ml",
 
-        category: "dau-xa",
+        category:
+            "dau-xa",
 
-        categoryName: "Dầu xả",
+        categoryName:
+            "Dầu xả",
 
-        price: 388000,
+        volume:
+            "310ml",
 
-        volume: "310ml",
+        price:
+            388000,
 
         image:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVTToPG_yudvoDtXvIjkh-42g8gBg6_rNUnREextcb85SNZAT1Ao3bdoyw&s=10",
 
         description:
-            "Dầu Xả Bưởi Cocoon giúp bổ sung độ ẩm cho thân tóc, hỗ trợ mái tóc mềm mại, bóng mượt và dễ chăm sóc hơn.",
+            "Dầu Xả Bưởi Cocoon 310ml có kết cấu kem đặc màu trắng ngà, hỗ trợ bổ sung độ ẩm và chăm sóc thân tóc sau bước gội.",
+
+        usage: [
+            "Sau khi gội tóc với Dầu Gội Bưởi, thoa sản phẩm lên tóc ướt.",
+
+            "Mát-xa nhẹ nhàng lên thân tóc, sau đó xả sạch lại với nước. Sử dụng hằng ngày để có kết quả tốt nhất."
+        ],
+
+        dosage:
+            "Từ 1–2 lần nhấn",
 
         texture:
             "Kem đặc màu trắng ngà",
@@ -268,620 +361,983 @@ const products = [
         scent:
             "Mùi tinh dầu bưởi thơm mát",
 
-        usage:
-            "Sau khi gội tóc với Dầu Gội Bưởi, thoa dầu xả lên tóc ướt và mát-xa nhẹ nhàng lên thân tóc. Sau đó xả sạch lại với nước.",
-
-        dosage:
-            "Từ 1–2 lần nhấn",
+        note:
+            "Tránh dùng vùng mắt, chỉ dùng ngoài da.",
 
         origin:
             "Việt Nam",
 
-        note:
-            "Tránh tiếp xúc với mắt. Chỉ dùng ngoài da.",
-
         ingredients: [
 
             {
-                name: "Tinh dầu bưởi",
+                name:
+                    "Tinh dầu bưởi",
 
-                content:
-                    "Mang hương thơm bưởi tươi mát và góp phần chăm sóc da đầu, tóc nhờ đặc tính chống oxy hóa."
+                description:
+                    "Mang hương thơm bưởi tươi mát và góp phần chăm sóc tóc nhờ các đặc tính được mô tả của tinh dầu vỏ bưởi."
             },
 
             {
-                name: "Xylishine™",
+                name:
+                    "Xylishine™",
 
-                content:
-                    "Hỗ trợ dưỡng ẩm và phục hồi tóc, giúp tóc tăng độ mềm mại và bóng mượt."
+                description:
+                    "Hỗ trợ dưỡng ẩm và phục hồi tóc, giúp tóc mềm mại và tăng độ bóng."
             },
 
             {
-                name: "Vitamin B5 (D-panthenol)",
+                name:
+                    "Vitamin B5 (D-panthenol)",
 
-                content:
-                    "Giúp cung cấp độ ẩm cho tóc, hỗ trợ hạn chế hư tổn và cải thiện độ bóng khỏe."
+                description:
+                    "Hỗ trợ cung cấp độ ẩm lâu dài cho tóc và cải thiện vẻ bóng khỏe."
             },
 
             {
-                name: "Axít amin",
+                name:
+                    "Axít amin",
 
-                content:
-                    "Hỗ trợ dưỡng ẩm, củng cố cấu trúc và bảo vệ bề mặt tóc."
+                description:
+                    "Hỗ trợ dưỡng ẩm, củng cố cấu trúc và chăm sóc bề mặt tóc."
             }
 
         ]
+
     },
 
+
+    /* =====================================================
+       SẢN PHẨM 05
+       ===================================================== */
 
     {
         id: 5,
 
-        name: "Combo Dầu Gội + Dầu Xả Bưởi Cocoon 310ml x 2",
+        name:
+            "Combo Dầu Gội + Dầu Xả Bưởi Cocoon 310ml x 2",
 
-        shortName: "Combo Dầu Gội + Dầu Xả Bưởi",
+        slug:
+            "combo-dau-goi-dau-xa-buoi-cocoon",
 
-        category: "combo",
+        category:
+            "combo",
 
-        categoryName: "Combo",
+        categoryName:
+            "Bộ đôi",
 
-        price: 590000,
+        volume:
+            "310ml x 2",
 
-        volume: "310ml x 2",
+        price:
+            590000,
 
         image:
             "https://oharabeauty.com/wp-content/uploads/2024/02/dau-xa-cocoon-buoi-cung-cap-duong-chat-do-am-310ml-2.png",
 
         description:
-            "Combo gồm Dầu Gội Bưởi và Dầu Xả Bưởi Cocoon 310ml, kết hợp làm sạch tóc và chăm sóc độ ẩm cho thân tóc trong cùng một chu trình.",
+            "Bộ đôi gồm Dầu Gội và Dầu Xả Bưởi Cocoon 310ml, kết hợp hai bước làm sạch và chăm sóc thân tóc trong cùng một chu trình.",
 
-        texture:
-            "Dầu gội dạng gel trong mờ và dầu xả dạng kem đặc màu trắng ngà",
+        usage: [
+            "Bước 1: Thoa Dầu Gội Bưởi lên tóc ướt và tạo bọt, mát-xa nhẹ nhàng từ gốc đến ngọn, sau đó gội sạch.",
 
-        scent:
-            "Mùi tinh dầu bưởi thơm mát",
-
-        usage:
-            "Bước 1: Thoa dầu gội lên tóc ướt, tạo bọt và mát-xa nhẹ nhàng từ gốc đến ngọn. Sau đó gội sạch.\n\nBước 2: Sau khi gội, thoa dầu xả lên thân tóc ướt, mát-xa nhẹ nhàng rồi xả sạch với nước.",
+            "Bước 2: Sau khi gội tóc với Dầu Gội Bưởi, thoa Dầu Xả Bưởi lên tóc ướt, mát-xa nhẹ nhàng lên thân tóc rồi xả sạch lại với nước."
+        ],
 
         dosage:
             "Từ 1–2 lần nhấn cho mỗi sản phẩm",
 
-        origin:
-            "Việt Nam",
+        texture:
+            "Gel trong mờ và kem đặc trắng ngà",
+
+        scent:
+            "Mùi tinh dầu bưởi thơm mát",
 
         note:
-            "Tránh tiếp xúc với mắt. Chỉ dùng ngoài da.",
+            "Tránh dùng vùng mắt, chỉ dùng ngoài da.",
+
+        origin:
+            "Việt Nam",
 
         ingredients: [
 
             {
-                name: "Tinh dầu bưởi",
+                name:
+                    "Tinh dầu bưởi",
 
-                content:
-                    "Chiết xuất từ vỏ bưởi, giàu limonene, có đặc tính kháng khuẩn và chống oxy hóa, góp phần chăm sóc da đầu và tóc."
+                description:
+                    "Được trích ly từ vỏ bưởi chứa limonene, có đặc tính kháng khuẩn và chống oxy hóa theo mô tả thành phần."
             },
 
             {
-                name: "Xylishine™",
+                name:
+                    "Xylishine™",
 
-                content:
-                    "Hỗ trợ dưỡng ẩm và phục hồi tóc, giúp tăng độ mềm mại và bóng mượt."
+                description:
+                    "Được chiết xuất từ tảo nâu Pelvetia canaliculata và các loại đường tự nhiên có trong gỗ; hỗ trợ dưỡng ẩm và phục hồi tóc."
             },
 
             {
-                name: "Vitamin B5 (D-panthenol)",
+                name:
+                    "Vitamin B5 (D-panthenol)",
 
-                content:
-                    "Giúp cung cấp độ ẩm lâu dài, hỗ trợ hạn chế hư tổn và cải thiện độ bóng khỏe."
+                description:
+                    "Hỗ trợ cung cấp độ ẩm lâu dài cho tóc, hạn chế hư tổn và cải thiện độ bóng khỏe."
             },
 
             {
-                name: "Axít amin",
+                name:
+                    "Axít amin",
 
-                content:
-                    "Có tác dụng dưỡng ẩm, củng cố cấu trúc và hỗ trợ bảo vệ bề mặt tóc."
+                description:
+                    "Có tác dụng dưỡng ẩm, củng cố cấu trúc, hỗ trợ bảo vệ màu sắc và chăm sóc bề mặt tóc."
             }
 
         ]
+
     }
 
 ];
 
 
 /* =========================================================
-   2. BIẾN GIỎ HÀNG
+   3. STATE
    ========================================================= */
 
-let cart = JSON.parse(
-    localStorage.getItem("cocoonCart")
-) || [];
+let cart = loadCart();
+
+let currentCategory = "all";
+
+let currentProductId = null;
 
 
 /* =========================================================
-   3. ĐỊNH DẠNG TIỀN VIỆT NAM
+   4. DOM
    ========================================================= */
 
-function formatPrice(price) {
+const DOM = {
+
+    productGrid:
+        document.getElementById("productGrid"),
+
+    productSearch:
+        document.getElementById("productSearch"),
+
+    emptyResult:
+        document.getElementById("emptyResult"),
+
+    filterList:
+        document.getElementById("filterList"),
+
+    cartCount:
+        document.getElementById("cartCount"),
+
+    cartDrawer:
+        document.getElementById("cartDrawer"),
+
+    cartOverlay:
+        document.getElementById("cartOverlay"),
+
+    cartItems:
+        document.getElementById("cartItems"),
+
+    cartTotal:
+        document.getElementById("cartTotal"),
+
+    orderSummaryList:
+        document.getElementById("orderSummaryList"),
+
+    orderItemCount:
+        document.getElementById("orderItemCount"),
+
+    orderTotal:
+        document.getElementById("orderTotal"),
+
+    orderForm:
+        document.getElementById("orderForm"),
+
+    orderSuccess:
+        document.getElementById("orderSuccess"),
+
+    successMessage:
+        document.getElementById("successMessage"),
+
+    productModal:
+        document.getElementById("productModal"),
+
+    modalProductImage:
+        document.getElementById("modalProductImage"),
+
+    modalProductCategory:
+        document.getElementById("modalProductCategory"),
+
+    modalProductName:
+        document.getElementById("modalProductName"),
+
+    modalProductPrice:
+        document.getElementById("modalProductPrice"),
+
+    modalProductDescription:
+        document.getElementById("modalProductDescription"),
+
+    modalProductDosage:
+        document.getElementById("modalProductDosage"),
+
+    modalProductTexture:
+        document.getElementById("modalProductTexture"),
+
+    modalProductScent:
+        document.getElementById("modalProductScent"),
+
+    modalProductOrigin:
+        document.getElementById("modalProductOrigin"),
+
+    modalProductUsage:
+        document.getElementById("modalProductUsage"),
+
+    modalProductIngredients:
+        document.getElementById("modalProductIngredients"),
+
+    modalProductNote:
+        document.getElementById("modalProductNote"),
+
+    modalAddToCart:
+        document.getElementById("modalAddToCart"),
+
+    toast:
+        document.getElementById("toast")
+
+};
+
+
+/* =========================================================
+   5. TIỆN ÍCH
+   ========================================================= */
+
+
+/**
+ * Chuyển số thành tiền Việt Nam.
+ */
+function formatPrice(value) {
 
     return new Intl.NumberFormat(
         "vi-VN"
-    ).format(price) + " VNĐ";
+    ).format(value) + " VNĐ";
+
+}
+
+
+/**
+ * Bỏ dấu tiếng Việt để tìm kiếm dễ hơn.
+ */
+function removeVietnameseTones(text) {
+
+    return text
+
+        .normalize("NFD")
+
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        )
+
+        .replace(
+            /đ/g,
+            "d"
+        )
+
+        .replace(
+            /Đ/g,
+            "D"
+        )
+
+        .toLowerCase()
+
+        .trim();
+
+}
+
+
+/**
+ * Escape HTML để tránh chèn HTML không mong muốn
+ * khi hiển thị dữ liệu.
+ */
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 
 /* =========================================================
-   4. LƯU GIỎ HÀNG
+   6. LOCAL STORAGE
    ========================================================= */
+
+function loadCart() {
+
+    try {
+
+        const savedCart =
+            localStorage.getItem(
+                CONFIG.storageKey
+            );
+
+
+        if (!savedCart) {
+
+            return [];
+
+        }
+
+
+        const parsed =
+            JSON.parse(savedCart);
+
+
+        if (!Array.isArray(parsed)) {
+
+            return [];
+
+        }
+
+
+        return parsed.filter(
+            item => {
+
+                return (
+                    Number.isInteger(
+                        Number(item.id)
+                    )
+
+                    &&
+
+                    Number(item.quantity) > 0
+
+                );
+
+            }
+        ).map(
+            item => ({
+
+                id:
+                    Number(item.id),
+
+                quantity:
+                    Math.max(
+                        1,
+                        Number(item.quantity)
+                    )
+
+            })
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Không thể đọc giỏ hàng:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
 
 function saveCart() {
 
-    localStorage.setItem(
-        "cocoonCart",
-        JSON.stringify(cart)
-    );
+    try {
+
+        localStorage.setItem(
+
+            CONFIG.storageKey,
+
+            JSON.stringify(cart)
+
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Không thể lưu giỏ hàng:",
+            error
+        );
+
+    }
 
 }
 
 
 /* =========================================================
-   5. LẤY SẢN PHẨM THEO ID
+   7. TÌM SẢN PHẨM
    ========================================================= */
 
 function getProduct(productId) {
 
     return products.find(
-        product => product.id === Number(productId)
+        product =>
+            product.id === Number(productId)
     );
 
 }
 
 
 /* =========================================================
-   6. HIỂN THỊ DANH SÁCH SẢN PHẨM
+   8. LỌC + TÌM KIẾM
    ========================================================= */
 
-function renderProducts(productList = products) {
+function getFilteredProducts() {
 
-    const productGrid =
-        document.getElementById("productGrid");
-
-    if (!productGrid) return;
-
-
-    if (productList.length === 0) {
-
-        productGrid.innerHTML = `
-            <div class="empty-products">
-                <p>Không tìm thấy sản phẩm phù hợp.</p>
-            </div>
-        `;
-
-        return;
-    }
+    const keyword =
+        removeVietnameseTones(
+            DOM.productSearch
+                ? DOM.productSearch.value
+                : ""
+        );
 
 
-    productGrid.innerHTML =
-        productList.map(product => {
+    return products.filter(
+        product => {
 
-            return `
+            const matchCategory =
 
-                <article
-                    class="product-card"
-                    data-id="${product.id}"
-                >
+                currentCategory === "all"
 
-                    <div class="product-card-image">
+                ||
 
-                        <img
-                            src="${product.image}"
-                            alt="${product.name}"
-                            loading="lazy"
-                            onerror="this.style.display='none'; this.parentElement.classList.add('image-error');"
-                        >
-
-                        <span class="product-category">
-                            ${product.categoryName}
-                        </span>
-
-                    </div>
+                product.category ===
+                    currentCategory;
 
 
-                    <div class="product-card-content">
+            if (!matchCategory) {
 
-                        <button
-                            class="product-name"
-                            type="button"
-                            onclick="openProductDetail(${product.id})"
-                        >
-                            ${product.name}
-                        </button>
+                return false;
+
+            }
 
 
-                        <p class="product-description">
-                            ${product.description}
-                        </p>
+            if (!keyword) {
+
+                return true;
+
+            }
 
 
-                        <div class="product-bottom">
+            const searchableText =
 
-                            <strong class="product-price">
-                                ${formatPrice(product.price)}
-                            </strong>
+                removeVietnameseTones(
 
-                            <button
-                                class="add-cart-btn"
-                                type="button"
-                                onclick="addToCart(${product.id})"
-                            >
-                                Thêm vào giỏ
-                            </button>
+                    [
 
-                        </div>
+                        product.name,
 
-                    </div>
+                        product.categoryName,
 
-                </article>
+                        product.volume,
 
-            `;
+                        product.description,
 
-        }).join("");
+                        product.scent,
+
+                        ...product.ingredients.map(
+                            ingredient =>
+                                ingredient.name
+                        )
+
+                    ].join(" ")
+
+                );
+
+
+            return searchableText.includes(
+                keyword
+            );
+
+        }
+    );
 
 }
 
 
 /* =========================================================
-   7. LỌC SẢN PHẨM
+   9. RENDER SẢN PHẨM
    ========================================================= */
 
-function filterProducts(category) {
+function renderProducts() {
 
-    const filterButtons =
-        document.querySelectorAll(".filter-btn");
-
-    filterButtons.forEach(button => {
-
-        button.classList.remove("active");
-
-        if (
-            button.dataset.category === category
-        ) {
-
-            button.classList.add("active");
-
-        }
-
-    });
-
-
-    if (category === "all") {
-
-        renderProducts(products);
+    if (!DOM.productGrid) {
 
         return;
+
     }
 
 
     const filteredProducts =
-        products.filter(
-            product =>
-                product.category === category
+        getFilteredProducts();
+
+
+    DOM.productGrid.innerHTML =
+        filteredProducts
+            .map(
+                product =>
+                    createProductCard(product)
+            )
+            .join("");
+
+
+    if (DOM.emptyResult) {
+
+        DOM.emptyResult.hidden =
+            filteredProducts.length !== 0;
+
+    }
+
+}
+
+
+/**
+ * Tạo card sản phẩm.
+ */
+function createProductCard(product) {
+
+    return `
+
+        <article
+            class="product-card"
+            data-product-id="${product.id}"
+        >
+
+            <div class="product-image-wrapper">
+
+                <span class="product-category-tag">
+                    ${escapeHTML(product.categoryName)}
+                </span>
+
+                <img
+                    src="${escapeHTML(product.image)}"
+                    alt="${escapeHTML(product.name)}"
+                    loading="lazy"
+                    onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,${createFallbackSVG(product)}';"
+                >
+
+            </div>
+
+
+            <div class="product-content">
+
+                <button
+                    type="button"
+                    class="product-title-button"
+                    data-product-detail="${product.id}"
+                >
+                    ${escapeHTML(product.name)}
+                </button>
+
+
+                <p class="product-description">
+                    ${escapeHTML(product.description)}
+                </p>
+
+
+                <div class="product-meta">
+
+                    <span class="product-volume">
+                        ${escapeHTML(product.volume)}
+                    </span>
+
+                    <strong class="product-price">
+                        ${formatPrice(product.price)}
+                    </strong>
+
+                </div>
+
+
+                <div class="product-actions">
+
+                    <button
+                        type="button"
+                        class="product-detail-button"
+                        data-product-detail="${product.id}"
+                    >
+                        Xem chi tiết
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="product-add-button"
+                        data-add-cart="${product.id}"
+                    >
+                        Thêm vào giỏ
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+/**
+ * SVG fallback nếu ảnh bên ngoài không tải được.
+ */
+function createFallbackSVG(product) {
+
+    const title =
+        encodeURIComponent(
+            product.categoryName
         );
 
 
-    renderProducts(filteredProducts);
+    return `
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500">
+
+            <rect
+                width="500"
+                height="500"
+                fill="%23f7f3e8"
+            />
+
+            <circle
+                cx="250"
+                cy="220"
+                r="120"
+                fill="%23e7d08b"
+                opacity=".7"
+            />
+
+            <text
+                x="250"
+                y="210"
+                text-anchor="middle"
+                font-family="serif"
+                font-size="46"
+                fill="%23173f2b"
+            >
+                COCOON
+            </text>
+
+            <text
+                x="250"
+                y="255"
+                text-anchor="middle"
+                font-family="sans-serif"
+                font-size="20"
+                fill="%233d7650"
+            >
+                ${title}
+            </text>
+
+        </svg>
+
+    `;
 
 }
 
 
 /* =========================================================
-   8. TÌM KIẾM SẢN PHẨM
+   10. FILTER BUTTONS
    ========================================================= */
 
-function searchProducts(keyword) {
+function handleCategoryFilter(category) {
 
-    const searchText =
-        keyword
-            .trim()
-            .toLowerCase();
+    currentCategory =
+        category;
 
 
-    if (!searchText) {
-
-        renderProducts(products);
-
-        return;
-    }
+    const buttons =
+        document.querySelectorAll(
+            ".filter-button"
+        );
 
 
-    const result =
-        products.filter(product => {
+    buttons.forEach(
+        button => {
 
-            return (
+            button.classList.toggle(
 
-                product.name
-                    .toLowerCase()
-                    .includes(searchText)
+                "active",
 
-                ||
-
-                product.categoryName
-                    .toLowerCase()
-                    .includes(searchText)
-
-                ||
-
-                product.description
-                    .toLowerCase()
-                    .includes(searchText)
+                button.dataset.category ===
+                    category
 
             );
 
-        });
+        }
+    );
 
 
-    renderProducts(result);
+    renderProducts();
 
 }
 
 
 /* =========================================================
-   9. MỞ CHI TIẾT SẢN PHẨM
+   11. PRODUCT MODAL
    ========================================================= */
 
-function openProductDetail(productId) {
+function openProductModal(productId) {
 
     const product =
         getProduct(productId);
 
-    if (!product) return;
 
+    if (!product) {
 
-    const modal =
-        document.getElementById("productModal");
-
-    if (!modal) return;
-
-
-    const modalImage =
-        document.getElementById("modalProductImage");
-
-    const modalCategory =
-        document.getElementById("modalProductCategory");
-
-    const modalName =
-        document.getElementById("modalProductName");
-
-    const modalPrice =
-        document.getElementById("modalProductPrice");
-
-    const modalDescription =
-        document.getElementById("modalProductDescription");
-
-    const modalUsage =
-        document.getElementById("modalProductUsage");
-
-    const modalDosage =
-        document.getElementById("modalProductDosage");
-
-    const modalTexture =
-        document.getElementById("modalProductTexture");
-
-    const modalScent =
-        document.getElementById("modalProductScent");
-
-    const modalOrigin =
-        document.getElementById("modalProductOrigin");
-
-    const modalNote =
-        document.getElementById("modalProductNote");
-
-    const modalIngredients =
-        document.getElementById("modalProductIngredients");
-
-
-    if (modalImage) {
-
-        modalImage.src =
-            product.image;
-
-        modalImage.alt =
-            product.name;
+        return;
 
     }
 
 
-    if (modalCategory) {
-
-        modalCategory.textContent =
-            product.categoryName;
-
-    }
+    currentProductId =
+        product.id;
 
 
-    if (modalName) {
-
-        modalName.textContent =
-            product.name;
-
-    }
+    DOM.modalProductImage.src =
+        product.image;
 
 
-    if (modalPrice) {
-
-        modalPrice.textContent =
-            formatPrice(product.price);
-
-    }
+    DOM.modalProductImage.alt =
+        product.name;
 
 
-    if (modalDescription) {
-
-        modalDescription.textContent =
-            product.description;
-
-    }
+    DOM.modalProductCategory.textContent =
+        product.categoryName;
 
 
-    if (modalUsage) {
-
-        modalUsage.innerHTML =
-            formatMultilineText(
-                product.usage
-            );
-
-    }
+    DOM.modalProductName.textContent =
+        product.name;
 
 
-    if (modalDosage) {
-
-        modalDosage.textContent =
-            product.dosage;
-
-    }
+    DOM.modalProductPrice.textContent =
+        formatPrice(product.price);
 
 
-    if (modalTexture) {
-
-        modalTexture.textContent =
-            product.texture;
-
-    }
+    DOM.modalProductDescription.textContent =
+        product.description;
 
 
-    if (modalScent) {
-
-        modalScent.textContent =
-            product.scent;
-
-    }
+    DOM.modalProductDosage.textContent =
+        product.dosage;
 
 
-    if (modalOrigin) {
-
-        modalOrigin.textContent =
-            product.origin;
-
-    }
+    DOM.modalProductTexture.textContent =
+        product.texture;
 
 
-    if (modalNote) {
-
-        modalNote.textContent =
-            product.note;
-
-    }
+    DOM.modalProductScent.textContent =
+        product.scent;
 
 
-    if (modalIngredients) {
-
-        modalIngredients.innerHTML =
-
-            product.ingredients
-                .map(ingredient => {
-
-                    return `
-
-                        <div class="ingredient-item">
-
-                            <h4>
-                                ${ingredient.name}
-                            </h4>
-
-                            <p>
-                                ${ingredient.content}
-                            </p>
-
-                        </div>
-
-                    `;
-
-                })
-                .join("");
-
-    }
+    DOM.modalProductOrigin.textContent =
+        product.origin;
 
 
-    modal.classList.add("active");
+    DOM.modalProductNote.textContent =
+        product.note;
+
+
+    DOM.modalProductUsage.innerHTML =
+
+        product.usage
+
+            .map(
+                (paragraph, index) => `
+
+                    <p>
+                        <strong>
+                            ${escapeHTML(
+                                getUsageLabel(
+                                    index,
+                                    product.usage.length
+                                )
+                            )}
+                        </strong>
+
+                        ${escapeHTML(paragraph)}
+                    </p>
+
+                `
+            )
+
+            .join("");
+
+
+    DOM.modalProductIngredients.innerHTML =
+
+        product.ingredients
+
+            .map(
+                ingredient => `
+
+                    <article class="ingredient-item">
+
+                        <h4>
+                            ${escapeHTML(
+                                ingredient.name
+                            )}
+                        </h4>
+
+                        <p>
+                            ${escapeHTML(
+                                ingredient.description
+                            )}
+                        </p>
+
+                    </article>
+
+                `
+            )
+
+            .join("");
+
+
+    DOM.productModal.classList.add(
+        "active"
+    );
+
+
+    DOM.productModal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
 
     document.body.classList.add(
         "modal-open"
     );
 
-}
 
-
-/* =========================================================
-   10. XỬ LÝ NỘI DUNG NHIỀU DÒNG
-   ========================================================= */
-
-function formatMultilineText(text) {
-
-    if (!text) return "";
-
-    return text
-        .split("\n\n")
-        .map(
-            paragraph =>
-                `<p>${paragraph}</p>`
-        )
-        .join("");
+    DOM.modalAddToCart.focus();
 
 }
 
 
-/* =========================================================
-   11. ĐÓNG CHI TIẾT SẢN PHẨM
-   ========================================================= */
+/**
+ * Đặt nhãn cho từng bước sử dụng.
+ */
+function getUsageLabel(index, total) {
 
-function closeProductDetail() {
+    if (total === 1) {
 
-    const modal =
-        document.getElementById("productModal");
+        return "";
 
-    if (!modal) return;
+    }
 
 
-    modal.classList.remove("active");
+    return `Bước ${index + 1}:`;
+
+}
+
+
+function closeProductModal() {
+
+    DOM.productModal.classList.remove(
+        "active"
+    );
+
+
+    DOM.productModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
 
     document.body.classList.remove(
         "modal-open"
     );
 
+
+    currentProductId =
+        null;
+
 }
 
 
 /* =========================================================
-   12. THÊM SẢN PHẨM VÀO GIỎ
+   12. GIỎ HÀNG
    ========================================================= */
 
-function addToCart(productId) {
+function addToCart(productId, quantity = 1) {
 
     const product =
         getProduct(productId);
 
-    if (!product) return;
+
+    if (!product) {
+
+        return;
+
+    }
 
 
-    const existingProduct =
+    const existingItem =
         cart.find(
             item =>
                 item.id === product.id
         );
 
 
-    if (existingProduct) {
+    if (existingItem) {
 
-        existingProduct.quantity += 1;
+        existingItem.quantity +=
+            quantity;
 
-    } else {
+    }
+
+    else {
 
         cart.push({
 
-            id: product.id,
+            id:
+                product.id,
 
-            quantity: 1
+            quantity:
+                quantity
 
         });
 
@@ -892,19 +1348,21 @@ function addToCart(productId) {
 
     renderCart();
 
+    renderOrderSummary();
+
     updateCartCount();
 
-    showCartNotification(
+
+    showToast(
         `${product.name} đã được thêm vào giỏ hàng.`
     );
 
 }
 
 
-/* =========================================================
-   13. XÓA SẢN PHẨM KHỎI GIỎ
-   ========================================================= */
-
+/**
+ * Xóa sản phẩm.
+ */
 function removeFromCart(productId) {
 
     cart =
@@ -918,35 +1376,45 @@ function removeFromCart(productId) {
 
     renderCart();
 
+    renderOrderSummary();
+
     updateCartCount();
 
 }
 
 
-/* =========================================================
-   14. THAY ĐỔI SỐ LƯỢNG
-   ========================================================= */
+/**
+ * Thay đổi số lượng.
+ */
+function changeQuantity(
+    productId,
+    amount
+) {
 
-function changeQuantity(productId, change) {
-
-    const cartItem =
+    const item =
         cart.find(
-            item =>
-                item.id === Number(productId)
+            cartItem =>
+                cartItem.id === Number(productId)
         );
 
 
-    if (!cartItem) return;
+    if (!item) {
+
+        return;
+
+    }
 
 
-    cartItem.quantity += change;
+    item.quantity +=
+        amount;
 
 
-    if (cartItem.quantity <= 0) {
+    if (item.quantity <= 0) {
 
         removeFromCart(productId);
 
         return;
+
     }
 
 
@@ -954,29 +1422,80 @@ function changeQuantity(productId, change) {
 
     renderCart();
 
+    renderOrderSummary();
+
     updateCartCount();
 
 }
 
 
-/* =========================================================
-   15. TÍNH SỐ LƯỢNG TRONG GIỎ
-   ========================================================= */
+/**
+ * Xóa toàn bộ giỏ.
+ */
+function clearCart() {
 
-function getCartQuantity() {
+    if (!cart.length) {
 
-    return cart.reduce(
-        (total, item) =>
-            total + item.quantity,
-        0
+        showToast(
+            "Giỏ hàng đang trống."
+        );
+
+        return;
+
+    }
+
+
+    const confirmed =
+        window.confirm(
+            "Bạn có chắc muốn xóa toàn bộ sản phẩm trong giỏ hàng?"
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    cart = [];
+
+
+    saveCart();
+
+    renderCart();
+
+    renderOrderSummary();
+
+    updateCartCount();
+
+
+    showToast(
+        "Đã xóa toàn bộ giỏ hàng."
     );
 
 }
 
 
 /* =========================================================
-   16. TÍNH TỔNG TIỀN
+   13. TÍNH TOÁN GIỎ
    ========================================================= */
+
+function getCartQuantity() {
+
+    return cart.reduce(
+
+        (total, item) =>
+
+            total +
+            item.quantity,
+
+        0
+
+    );
+
+}
+
 
 function getCartTotal() {
 
@@ -987,14 +1506,21 @@ function getCartTotal() {
             const product =
                 getProduct(item.id);
 
+
             if (!product) {
+
                 return total;
+
             }
 
+
             return (
+
                 total +
+
                 product.price *
                 item.quantity
+
             );
 
         },
@@ -1007,45 +1533,21 @@ function getCartTotal() {
 
 
 /* =========================================================
-   17. HIỂN THỊ SỐ LƯỢNG GIỎ HÀNG
-   ========================================================= */
-
-function updateCartCount() {
-
-    const cartCount =
-        document.getElementById("cartCount");
-
-    if (!cartCount) return;
-
-
-    const quantity =
-        getCartQuantity();
-
-
-    cartCount.textContent =
-        quantity;
-
-}
-
-
-/* =========================================================
-   18. HIỂN THỊ GIỎ HÀNG
+   14. RENDER CART
    ========================================================= */
 
 function renderCart() {
 
-    const cartItems =
-        document.getElementById("cartItems");
+    if (!DOM.cartItems) {
 
-    const cartTotal =
-        document.getElementById("cartTotal");
+        return;
 
-    if (!cartItems) return;
+    }
 
 
-    if (cart.length === 0) {
+    if (!cart.length) {
 
-        cartItems.innerHTML = `
+        DOM.cartItems.innerHTML = `
 
             <div class="empty-cart">
 
@@ -1065,150 +1567,186 @@ function renderCart() {
 
         `;
 
-        if (cartTotal) {
 
-            cartTotal.textContent =
-                "0 VNĐ";
+        DOM.cartTotal.textContent =
+            "0 VNĐ";
 
-        }
 
         return;
+
     }
 
 
-    cartItems.innerHTML =
+    DOM.cartItems.innerHTML =
 
-        cart.map(item => {
+        cart
 
-            const product =
-                getProduct(item.id);
+            .map(
+                item => {
 
-            if (!product) {
-                return "";
-            }
-
-
-            const subtotal =
-                product.price *
-                item.quantity;
+                    const product =
+                        getProduct(item.id);
 
 
-            return `
+                    if (!product) {
 
-                <div class="cart-item">
+                        return "";
 
-                    <div class="cart-item-image">
-
-                        <img
-                            src="${product.image}"
-                            alt="${product.name}"
-                        >
-
-                    </div>
+                    }
 
 
-                    <div class="cart-item-info">
-
-                        <button
-                            class="cart-item-name"
-                            type="button"
-                            onclick="openProductDetail(${product.id})"
-                        >
-                            ${product.name}
-                        </button>
+                    const subtotal =
+                        product.price *
+                        item.quantity;
 
 
-                        <div class="cart-item-price">
-                            ${formatPrice(product.price)}
-                        </div>
+                    return `
 
+                        <article class="cart-item">
 
-                        <div class="cart-item-actions">
+                            <div class="cart-item-image">
 
-                            <div class="quantity-control">
-
-                                <button
-                                    type="button"
-                                    onclick="changeQuantity(${product.id}, -1)"
+                                <img
+                                    src="${escapeHTML(product.image)}"
+                                    alt="${escapeHTML(product.name)}"
+                                    onerror="this.style.display='none';"
                                 >
-                                    −
-                                </button>
-
-                                <span>
-                                    ${item.quantity}
-                                </span>
-
-                                <button
-                                    type="button"
-                                    onclick="changeQuantity(${product.id}, 1)"
-                                >
-                                    +
-                                </button>
 
                             </div>
 
 
-                            <strong>
-                                ${formatPrice(subtotal)}
-                            </strong>
+                            <div>
 
-                        </div>
-
-
-                        <button
-                            class="remove-cart-item"
-                            type="button"
-                            onclick="removeFromCart(${product.id})"
-                        >
-                            Xóa
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }).join("");
+                                <button
+                                    type="button"
+                                    class="cart-item-name"
+                                    data-product-detail="${product.id}"
+                                >
+                                    ${escapeHTML(product.name)}
+                                </button>
 
 
-    if (cartTotal) {
+                                <div class="cart-item-price">
+                                    ${formatPrice(product.price)}
+                                </div>
 
-        cartTotal.textContent =
-            formatPrice(
-                getCartTotal()
-            );
 
-    }
+                                <div class="cart-item-bottom">
+
+                                    <div class="quantity-control">
+
+                                        <button
+                                            type="button"
+                                            aria-label="Giảm số lượng"
+                                            data-quantity-minus="${product.id}"
+                                        >
+                                            −
+                                        </button>
+
+                                        <span>
+                                            ${item.quantity}
+                                        </span>
+
+                                        <button
+                                            type="button"
+                                            aria-label="Tăng số lượng"
+                                            data-quantity-plus="${product.id}"
+                                        >
+                                            +
+                                        </button>
+
+                                    </div>
+
+
+                                    <strong class="cart-item-subtotal">
+                                        ${formatPrice(subtotal)}
+                                    </strong>
+
+                                </div>
+
+
+                                <button
+                                    type="button"
+                                    class="remove-item"
+                                    data-remove-cart="${product.id}"
+                                >
+                                    Xóa sản phẩm
+                                </button>
+
+                            </div>
+
+                        </article>
+
+                    `;
+
+                }
+            )
+
+            .join("");
+
+
+    DOM.cartTotal.textContent =
+        formatPrice(
+            getCartTotal()
+        );
 
 }
 
 
 /* =========================================================
-   19. MỞ GIỎ HÀNG
+   15. CART COUNT
+   ========================================================= */
+
+function updateCartCount() {
+
+    if (!DOM.cartCount) {
+
+        return;
+
+    }
+
+
+    const quantity =
+        getCartQuantity();
+
+
+    DOM.cartCount.textContent =
+        quantity > 99
+            ? "99+"
+            : quantity;
+
+}
+
+
+/* =========================================================
+   16. OPEN / CLOSE CART
    ========================================================= */
 
 function openCart() {
 
-    const cartDrawer =
-        document.getElementById("cartDrawer");
-
-    const cartOverlay =
-        document.getElementById("cartOverlay");
+    renderCart();
 
 
-    if (cartDrawer) {
-
-        cartDrawer.classList.add("active");
-
-    }
+    DOM.cartDrawer.classList.add(
+        "active"
+    );
 
 
-    if (cartOverlay) {
+    DOM.cartOverlay.classList.add(
+        "active"
+    );
 
-        cartOverlay.classList.add("active");
 
-    }
+    DOM.cartDrawer.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    DOM.cartOverlay.setAttribute(
+        "aria-hidden",
+        "false"
+    );
 
 
     document.body.classList.add(
@@ -1218,35 +1756,28 @@ function openCart() {
 }
 
 
-/* =========================================================
-   20. ĐÓNG GIỎ HÀNG
-   ========================================================= */
-
 function closeCart() {
 
-    const cartDrawer =
-        document.getElementById("cartDrawer");
-
-    const cartOverlay =
-        document.getElementById("cartOverlay");
+    DOM.cartDrawer.classList.remove(
+        "active"
+    );
 
 
-    if (cartDrawer) {
-
-        cartDrawer.classList.remove(
-            "active"
-        );
-
-    }
+    DOM.cartOverlay.classList.remove(
+        "active"
+    );
 
 
-    if (cartOverlay) {
+    DOM.cartDrawer.setAttribute(
+        "aria-hidden",
+        "true"
+    );
 
-        cartOverlay.classList.remove(
-            "active"
-        );
 
-    }
+    DOM.cartOverlay.setAttribute(
+        "aria-hidden",
+        "true"
+    );
 
 
     document.body.classList.remove(
@@ -1257,333 +1788,381 @@ function closeCart() {
 
 
 /* =========================================================
-   21. THÔNG BÁO THÊM GIỎ HÀNG
-   ========================================================= */
-
-function showCartNotification(message) {
-
-    let notification =
-        document.getElementById(
-            "cartNotification"
-        );
-
-
-    if (!notification) {
-
-        notification =
-            document.createElement(
-                "div"
-            );
-
-        notification.id =
-            "cartNotification";
-
-        notification.className =
-            "cart-notification";
-
-        document.body.appendChild(
-            notification
-        );
-
-    }
-
-
-    notification.textContent =
-        message;
-
-
-    notification.classList.add(
-        "show"
-    );
-
-
-    clearTimeout(
-        window.cartNotificationTimer
-    );
-
-
-    window.cartNotificationTimer =
-        setTimeout(() => {
-
-            notification.classList.remove(
-                "show"
-            );
-
-        }, 2500);
-
-}
-
-
-/* =========================================================
-   22. XÓA TOÀN BỘ GIỎ HÀNG
-   ========================================================= */
-
-function clearCart() {
-
-    if (cart.length === 0) {
-        return;
-    }
-
-
-    const confirmed =
-        window.confirm(
-            "Bạn có chắc muốn xóa toàn bộ sản phẩm trong giỏ hàng?"
-        );
-
-
-    if (!confirmed) {
-        return;
-    }
-
-
-    cart = [];
-
-
-    saveCart();
-
-    renderCart();
-
-    updateCartCount();
-
-}
-
-
-/* =========================================================
-   23. ĐƯA SẢN PHẨM VÀO FORM ĐẶT HÀNG
-   ========================================================= */
-
-function prepareOrder() {
-
-    if (cart.length === 0) {
-
-        showCartNotification(
-            "Giỏ hàng của bạn đang trống."
-        );
-
-        return;
-    }
-
-
-    closeCart();
-
-
-    const orderSection =
-        document.getElementById(
-            "order"
-        );
-
-
-    if (orderSection) {
-
-        orderSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-    }
-
-
-    renderOrderSummary();
-
-}
-
-
-/* =========================================================
-   24. HIỂN THỊ TÓM TẮT ĐƠN HÀNG
+   17. ORDER SUMMARY
    ========================================================= */
 
 function renderOrderSummary() {
 
-    const orderSummary =
-        document.getElementById(
-            "orderSummary"
-        );
+    if (!DOM.orderSummaryList) {
 
-    const orderTotal =
-        document.getElementById(
-            "orderTotal"
-        );
+        return;
+
+    }
 
 
-    if (!orderSummary) return;
+    const quantity =
+        getCartQuantity();
 
 
-    if (cart.length === 0) {
+    if (DOM.orderItemCount) {
 
-        orderSummary.innerHTML = `
+        DOM.orderItemCount.textContent =
 
-            <p class="order-empty">
-                Chưa có sản phẩm nào trong đơn hàng.
-            </p>
+            `${quantity} sản phẩm`;
+
+    }
+
+
+    if (!cart.length) {
+
+        DOM.orderSummaryList.innerHTML = `
+
+            <div class="order-empty">
+
+                <span>
+                    🛍
+                </span>
+
+                <p>
+                    Giỏ hàng đang trống.
+                </p>
+
+                <a href="#products">
+                    Chọn sản phẩm
+                </a>
+
+            </div>
 
         `;
 
 
-        if (orderTotal) {
+        DOM.orderTotal.textContent =
+            "0 VNĐ";
 
-            orderTotal.textContent =
-                "0 VNĐ";
-
-        }
 
         return;
+
     }
 
 
-    orderSummary.innerHTML =
+    DOM.orderSummaryList.innerHTML =
 
-        cart.map(item => {
+        cart
 
-            const product =
-                getProduct(item.id);
+            .map(
+                item => {
 
-            if (!product) {
-                return "";
+                    const product =
+                        getProduct(item.id);
+
+
+                    if (!product) {
+
+                        return "";
+
+                    }
+
+
+                    const subtotal =
+                        product.price *
+                        item.quantity;
+
+
+                    return `
+
+                        <article
+                            class="order-summary-item"
+                        >
+
+                            <img
+                                class="order-summary-image"
+                                src="${escapeHTML(product.image)}"
+                                alt="${escapeHTML(product.name)}"
+                            >
+
+
+                            <div
+                                class="order-summary-info"
+                            >
+
+                                <strong>
+                                    ${escapeHTML(product.name)}
+                                </strong>
+
+                                <span>
+                                    Số lượng:
+                                    ${item.quantity}
+                                </span>
+
+                            </div>
+
+
+                            <strong
+                                class="order-summary-price"
+                            >
+                                ${formatPrice(subtotal)}
+                            </strong>
+
+                        </article>
+
+                    `;
+
+                }
+            )
+
+            .join("");
+
+
+    DOM.orderTotal.textContent =
+        formatPrice(
+            getCartTotal()
+        );
+
+}
+
+
+/* =========================================================
+   18. VALIDATION FORM
+   ========================================================= */
+
+function clearFormErrors() {
+
+    document
+        .querySelectorAll(".form-error")
+        .forEach(
+            element => {
+
+                element.textContent =
+                    "";
+
             }
+        );
 
 
-            const subtotal =
-                product.price *
-                item.quantity;
+    document
+        .querySelectorAll(
+            "#orderForm input, #orderForm textarea"
+        )
+        .forEach(
+            element => {
+
+                element.removeAttribute(
+                    "aria-invalid"
+                );
+
+            }
+        );
+
+}
 
 
-            return `
+function setFormError(
+    fieldName,
+    message
+) {
 
-                <div class="order-summary-item">
-
-                    <div>
-
-                        <strong>
-                            ${product.name}
-                        </strong>
-
-                        <span>
-                            Số lượng: ${item.quantity}
-                        </span>
-
-                    </div>
+    const error =
+        document.querySelector(
+            `[data-error-for="${fieldName}"]`
+        );
 
 
-                    <strong>
-                        ${formatPrice(subtotal)}
-                    </strong>
-
-                </div>
-
-            `;
-
-        }).join("");
+    const field =
+        document.querySelector(
+            `[name="${fieldName}"]`
+        );
 
 
-    if (orderTotal) {
+    if (error) {
 
-        orderTotal.textContent =
-            formatPrice(
-                getCartTotal()
-            );
+        error.textContent =
+            message;
+
+    }
+
+
+    if (field) {
+
+        field.setAttribute(
+            "aria-invalid",
+            "true"
+        );
 
     }
 
 }
 
 
+function validateOrderForm(formData) {
+
+    clearFormErrors();
+
+
+    let valid = true;
+
+
+    if (
+        !formData.customerName ||
+        formData.customerName.length < 2
+    ) {
+
+        setFormError(
+            "customerName",
+            "Vui lòng nhập họ và tên."
+        );
+
+        valid = false;
+
+    }
+
+
+    const phone =
+        formData.customerPhone
+            .replace(/\s/g, "");
+
+
+    if (
+        !/^0\d{9}$/.test(phone)
+    ) {
+
+        setFormError(
+            "customerPhone",
+            "Số điện thoại chưa đúng định dạng."
+        );
+
+        valid = false;
+
+    }
+
+
+    if (
+        !formData.customerAddress ||
+        formData.customerAddress.length < 8
+    ) {
+
+        setFormError(
+            "customerAddress",
+            "Vui lòng nhập địa chỉ nhận hàng."
+        );
+
+        valid = false;
+
+    }
+
+
+    return valid;
+
+}
+
+
 /* =========================================================
-   25. ĐẶT HÀNG
+   19. SUBMIT ORDER
    ========================================================= */
 
-function submitOrder(event) {
+function handleOrderSubmit(event) {
 
     event.preventDefault();
 
 
-    if (cart.length === 0) {
+    if (!cart.length) {
 
-        showCartNotification(
+        showToast(
             "Bạn chưa chọn sản phẩm."
         );
 
+
+        document
+            .getElementById("products")
+            ?.scrollIntoView({
+                behavior: "smooth"
+            });
+
+
         return;
+
     }
 
 
-    const form =
-        event.target;
-
-
-    const customerName =
-        form.querySelector(
-            '[name="customerName"]'
-        )?.value.trim();
-
-
-    const customerPhone =
-        form.querySelector(
-            '[name="customerPhone"]'
-        )?.value.trim();
-
-
-    const customerAddress =
-        form.querySelector(
-            '[name="customerAddress"]'
-        )?.value.trim();
-
-
-    if (
-        !customerName ||
-        !customerPhone ||
-        !customerAddress
-    ) {
-
-        showCartNotification(
-            "Vui lòng điền đầy đủ thông tin nhận hàng."
+    const formData =
+        new FormData(
+            DOM.orderForm
         );
 
-        return;
-    }
+
+    const order = {
+
+        customerName:
+            String(
+                formData.get(
+                    "customerName"
+                ) || ""
+            ).trim(),
+
+        customerPhone:
+            String(
+                formData.get(
+                    "customerPhone"
+                ) || ""
+            ).trim(),
+
+        customerEmail:
+            String(
+                formData.get(
+                    "customerEmail"
+                ) || ""
+            ).trim(),
+
+        customerAddress:
+            String(
+                formData.get(
+                    "customerAddress"
+                ) || ""
+            ).trim(),
+
+        paymentMethod:
+            String(
+                formData.get(
+                    "paymentMethod"
+                ) || "cod"
+            ),
+
+        customerNote:
+            String(
+                formData.get(
+                    "customerNote"
+                ) || ""
+            ).trim(),
+
+        items:
+            cart.map(
+                item => {
+
+                    const product =
+                        getProduct(item.id);
 
 
-    const orderData = {
+                    return {
 
-        customer: {
+                        id:
+                            product.id,
 
-            name:
-                customerName,
+                        name:
+                            product.name,
 
-            phone:
-                customerPhone,
+                        price:
+                            product.price,
 
-            address:
-                customerAddress
+                        quantity:
+                            item.quantity,
 
-        },
+                        subtotal:
+                            product.price *
+                            item.quantity
 
-        products:
-            cart.map(item => {
+                    };
 
-                const product =
-                    getProduct(item.id);
-
-                return {
-
-                    id:
-                        product.id,
-
-                    name:
-                        product.name,
-
-                    price:
-                        product.price,
-
-                    quantity:
-                        item.quantity,
-
-                    subtotal:
-                        product.price *
-                        item.quantity
-
-                };
-
-            }),
+                }
+            ),
 
         total:
             getCartTotal(),
@@ -1594,60 +2173,67 @@ function submitOrder(event) {
     };
 
 
-    console.log(
-        "Đơn hàng:",
-        orderData
-    );
-
-
-    const successMessage =
-        document.getElementById(
-            "orderSuccess"
+    const isValid =
+        validateOrderForm(
+            order
         );
 
 
-    if (successMessage) {
+    if (!isValid) {
 
-        successMessage.innerHTML = `
-
-            <div class="success-icon">
-                ✓
-            </div>
-
-            <h3>
-                Đặt hàng thành công!
-            </h3>
-
-            <p>
-                Cảm ơn ${customerName}
-                đã lựa chọn sản phẩm.
-            </p>
-
-            <p>
-                Tổng giá trị đơn hàng:
-                <strong>
-                    ${formatPrice(orderData.total)}
-                </strong>
-            </p>
-
-            <p>
-                Chúng tôi sẽ liên hệ qua số
-                <strong>
-                    ${customerPhone}
-                </strong>
-                để xác nhận đơn hàng.
-            </p>
-
-        `;
-
-        successMessage.classList.add(
-            "show"
+        showToast(
+            "Vui lòng kiểm tra lại thông tin."
         );
+
+        return;
 
     }
 
 
-    form.reset();
+    /*
+     * Đây là nơi có thể kết nối API/backend
+     * nếu website sau này cần lưu đơn thật.
+     *
+     * Hiện tại demo lưu đơn gần nhất
+     * vào localStorage.
+     */
+
+    localStorage.setItem(
+        "nangNiuMaiTocVietLastOrder",
+        JSON.stringify(order)
+    );
+
+
+    const formattedPhone =
+        order.customerPhone;
+
+
+    DOM.successMessage.innerHTML = `
+
+        Cảm ơn
+        <strong>
+            ${escapeHTML(order.customerName)}
+        </strong>.
+        Đơn hàng trị giá
+        <strong>
+            ${formatPrice(order.total)}
+        </strong>
+        đã được ghi nhận.
+        Chúng tôi sẽ liên hệ qua số
+        <strong>
+            ${escapeHTML(formattedPhone)}
+        </strong>
+        để xác nhận.
+
+    `;
+
+
+    DOM.orderForm.hidden =
+        true;
+
+
+    DOM.orderSuccess.hidden =
+        false;
 
 
     cart = [];
@@ -1657,47 +2243,273 @@ function submitOrder(event) {
 
     renderCart();
 
-    updateCartCount();
-
     renderOrderSummary();
 
+    updateCartCount();
 
-    if (successMessage) {
 
-        successMessage.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
+    showToast(
+        "Đặt hàng thành công."
+    );
 
-    }
+
+    DOM.orderSuccess.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
 
 }
 
 
 /* =========================================================
-   26. ĐÓNG MODAL KHI CLICK RA NGOÀI
+   20. TOAST
    ========================================================= */
 
-function setupModalEvents() {
+let toastTimer = null;
 
-    const modal =
+
+function showToast(message) {
+
+    if (!DOM.toast) {
+
+        return;
+
+    }
+
+
+    DOM.toast.textContent =
+        message;
+
+
+    DOM.toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                DOM.toast.classList.remove(
+                    "show"
+                );
+
+            },
+
+            2800
+
+        );
+
+}
+
+
+/* =========================================================
+   21. MOBILE MENU
+   ========================================================= */
+
+function setupMobileMenu() {
+
+    const toggle =
         document.getElementById(
-            "productModal"
+            "menuToggle"
         );
 
 
-    if (!modal) return;
+    const navigation =
+        document.getElementById(
+            "mainNavigation"
+        );
 
 
-    modal.addEventListener(
+    if (
+        !toggle ||
+        !navigation
+    ) {
+
+        return;
+
+    }
+
+
+    toggle.addEventListener(
         "click",
-        function(event) {
+        () => {
 
-            if (
-                event.target === modal
-            ) {
+            const active =
+                navigation.classList.toggle(
+                    "active"
+                );
 
-                closeProductDetail();
+
+            toggle.setAttribute(
+                "aria-expanded",
+                String(active)
+            );
+
+        }
+    );
+
+
+    navigation
+        .querySelectorAll("a")
+        .forEach(
+            link => {
+
+                link.addEventListener(
+                    "click",
+                    () => {
+
+                        navigation.classList.remove(
+                            "active"
+                        );
+
+
+                        toggle.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   22. EVENT DELEGATION
+   ========================================================= */
+
+function setupProductEvents() {
+
+    /*
+     * Click vào tên hoặc nút "Xem chi tiết".
+     */
+
+    document.addEventListener(
+        "click",
+        event => {
+
+            const detailButton =
+                event.target.closest(
+                    "[data-product-detail]"
+                );
+
+
+            if (detailButton) {
+
+                const productId =
+                    detailButton.dataset.productDetail;
+
+
+                openProductModal(
+                    productId
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * Thêm vào giỏ.
+             */
+
+            const addButton =
+                event.target.closest(
+                    "[data-add-cart]"
+                );
+
+
+            if (addButton) {
+
+                const productId =
+                    addButton.dataset.addCart;
+
+
+                addToCart(
+                    productId
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * Tăng số lượng.
+             */
+
+            const plusButton =
+                event.target.closest(
+                    "[data-quantity-plus]"
+                );
+
+
+            if (plusButton) {
+
+                changeQuantity(
+
+                    plusButton.dataset.quantityPlus,
+
+                    1
+
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * Giảm số lượng.
+             */
+
+            const minusButton =
+                event.target.closest(
+                    "[data-quantity-minus]"
+                );
+
+
+            if (minusButton) {
+
+                changeQuantity(
+
+                    minusButton.dataset.quantityMinus,
+
+                    -1
+
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * Xóa sản phẩm.
+             */
+
+            const removeButton =
+                event.target.closest(
+                    "[data-remove-cart]"
+                );
+
+
+            if (removeButton) {
+
+                removeFromCart(
+
+                    removeButton.dataset.removeCart
+
+                );
 
             }
 
@@ -1708,20 +2520,249 @@ function setupModalEvents() {
 
 
 /* =========================================================
-   27. PHÍM ESC
+   23. FILTER EVENTS
+   ========================================================= */
+
+function setupFilterEvents() {
+
+    if (!DOM.filterList) {
+
+        return;
+
+    }
+
+
+    DOM.filterList.addEventListener(
+        "click",
+        event => {
+
+            const button =
+                event.target.closest(
+                    "[data-category]"
+                );
+
+
+            if (!button) {
+
+                return;
+
+            }
+
+
+            handleCategoryFilter(
+                button.dataset.category
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   24. SEARCH
+   ========================================================= */
+
+function setupSearch() {
+
+    if (!DOM.productSearch) {
+
+        return;
+
+    }
+
+
+    DOM.productSearch.addEventListener(
+        "input",
+        () => {
+
+            renderProducts();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   25. MODAL EVENTS
+   ========================================================= */
+
+function setupModalEvents() {
+
+    const closeButton =
+        document.getElementById(
+            "closeProductModal"
+        );
+
+
+    const backdrop =
+        DOM.productModal.querySelector(
+            ".product-modal-backdrop"
+        );
+
+
+    closeButton.addEventListener(
+        "click",
+        closeProductModal
+    );
+
+
+    backdrop.addEventListener(
+        "click",
+        closeProductModal
+    );
+
+
+    DOM.modalAddToCart.addEventListener(
+        "click",
+        () => {
+
+            if (!currentProductId) {
+
+                return;
+
+            }
+
+
+            addToCart(
+                currentProductId
+            );
+
+
+            closeProductModal();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   26. CART EVENTS
+   ========================================================= */
+
+function setupCartEvents() {
+
+    document
+        .getElementById("openCartButton")
+        .addEventListener(
+            "click",
+            openCart
+        );
+
+
+    document
+        .getElementById("closeCartButton")
+        .addEventListener(
+            "click",
+            closeCart
+        );
+
+
+    DOM.cartOverlay.addEventListener(
+        "click",
+        closeCart
+    );
+
+
+    document
+        .getElementById("clearCartButton")
+        .addEventListener(
+            "click",
+            clearCart
+        );
+
+
+    document
+        .getElementById("cartCheckoutButton")
+        .addEventListener(
+            "click",
+            () => {
+
+                if (!cart.length) {
+
+                    showToast(
+                        "Giỏ hàng đang trống."
+                    );
+
+                    return;
+
+                }
+
+
+                closeCart();
+
+
+                document
+                    .getElementById("order")
+                    ?.scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   27. ORDER EVENTS
+   ========================================================= */
+
+function setupOrderEvents() {
+
+    DOM.orderForm.addEventListener(
+        "submit",
+        handleOrderSubmit
+    );
+
+
+    document
+        .getElementById(
+            "continueShoppingButton"
+        )
+        .addEventListener(
+            "click",
+            () => {
+
+                DOM.orderSuccess.hidden =
+                    true;
+
+
+                DOM.orderForm.hidden =
+                    false;
+
+
+                document
+                    .getElementById(
+                        "products"
+                    )
+                    ?.scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   28. KEYBOARD
    ========================================================= */
 
 function setupKeyboardEvents() {
 
     document.addEventListener(
         "keydown",
-        function(event) {
+        event => {
 
             if (
                 event.key === "Escape"
             ) {
 
-                closeProductDetail();
+                closeProductModal();
 
                 closeCart();
 
@@ -1734,351 +2775,82 @@ function setupKeyboardEvents() {
 
 
 /* =========================================================
-   28. NÚT LỌC
+   29. KHỞI TẠO
    ========================================================= */
 
-function setupFilterButtons() {
+function init() {
 
-    const buttons =
-        document.querySelectorAll(
-            ".filter-btn"
-        );
+    /*
+     * Render lần đầu.
+     */
+
+    renderProducts();
+
+    renderCart();
+
+    renderOrderSummary();
+
+    updateCartCount();
 
 
-    buttons.forEach(button => {
+    /*
+     * Events.
+     */
 
-        button.addEventListener(
-            "click",
-            function() {
+    setupProductEvents();
 
-                const category =
-                    this.dataset.category;
+    setupFilterEvents();
 
-                filterProducts(
-                    category
-                );
+    setupSearch();
 
-            }
-        );
+    setupModalEvents();
 
-    });
+    setupCartEvents();
+
+    setupOrderEvents();
+
+    setupMobileMenu();
+
+    setupKeyboardEvents();
 
 }
 
 
 /* =========================================================
-   29. TÌM KIẾM
-   ========================================================= */
-
-function setupSearch() {
-
-    const searchInput =
-        document.getElementById(
-            "productSearch"
-        );
-
-
-    if (!searchInput) return;
-
-
-    searchInput.addEventListener(
-        "input",
-        function() {
-
-            searchProducts(
-                this.value
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   30. CÁC NÚT GIỎ HÀNG
-   ========================================================= */
-
-function setupCartButtons() {
-
-    const cartButtons =
-        document.querySelectorAll(
-            "[data-open-cart]"
-        );
-
-
-    cartButtons.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            openCart
-        );
-
-    });
-
-
-    const closeCartButton =
-        document.querySelector(
-            "[data-close-cart]"
-        );
-
-
-    if (closeCartButton) {
-
-        closeCartButton.addEventListener(
-            "click",
-            closeCart
-        );
-
-    }
-
-
-    const cartOverlay =
-        document.getElementById(
-            "cartOverlay"
-        );
-
-
-    if (cartOverlay) {
-
-        cartOverlay.addEventListener(
-            "click",
-            closeCart
-        );
-
-    }
-
-
-    const checkoutButton =
-        document.getElementById(
-            "checkoutButton"
-        );
-
-
-    if (checkoutButton) {
-
-        checkoutButton.addEventListener(
-            "click",
-            prepareOrder
-        );
-
-    }
-
-
-    const clearCartButton =
-        document.getElementById(
-            "clearCartButton"
-        );
-
-
-    if (clearCartButton) {
-
-        clearCartButton.addEventListener(
-            "click",
-            clearCart
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   31. FORM ĐẶT HÀNG
-   ========================================================= */
-
-function setupOrderForm() {
-
-    const orderForm =
-        document.getElementById(
-            "orderForm"
-        );
-
-
-    if (!orderForm) return;
-
-
-    orderForm.addEventListener(
-        "submit",
-        submitOrder
-    );
-
-}
-
-
-/* =========================================================
-   32. MENU MOBILE
-   ========================================================= */
-
-function setupMobileMenu() {
-
-    const menuButton =
-        document.getElementById(
-            "menuButton"
-        );
-
-    const navigation =
-        document.getElementById(
-            "mainNavigation"
-        );
-
-
-    if (
-        !menuButton ||
-        !navigation
-    ) {
-        return;
-    }
-
-
-    menuButton.addEventListener(
-        "click",
-        function() {
-
-            navigation.classList.toggle(
-                "active"
-            );
-
-            menuButton.classList.toggle(
-                "active"
-            );
-
-        }
-    );
-
-
-    const navLinks =
-        navigation.querySelectorAll(
-            "a"
-        );
-
-
-    navLinks.forEach(link => {
-
-        link.addEventListener(
-            "click",
-            function() {
-
-                navigation.classList.remove(
-                    "active"
-                );
-
-                menuButton.classList.remove(
-                    "active"
-                );
-
-            }
-        );
-
-    });
-
-}
-
-
-/* =========================================================
-   33. KHỞI TẠO WEBSITE
+   30. START
    ========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    function() {
-
-        /* Hiển thị sản phẩm */
-        renderProducts(
-            products
-        );
-
-
-        /* Hiển thị giỏ hàng */
-        renderCart();
-
-
-        /* Cập nhật số lượng */
-        updateCartCount();
-
-
-        /* Hiển thị tóm tắt đơn */
-        renderOrderSummary();
-
-
-        /* Bộ lọc */
-        setupFilterButtons();
-
-
-        /* Tìm kiếm */
-        setupSearch();
-
-
-        /* Giỏ hàng */
-        setupCartButtons();
-
-
-        /* Form */
-        setupOrderForm();
-
-
-        /* Modal */
-        setupModalEvents();
-
-
-        /* Phím ESC */
-        setupKeyboardEvents();
-
-
-        /* Menu mobile */
-        setupMobileMenu();
-
-    }
+    init
 );
 
 
 /* =========================================================
-   34. XUẤT DỮ LIỆU RA WINDOW
+   31. EXPORT
    ---------------------------------------------------------
-   Cho phép HTML gọi trực tiếp:
-   openProductDetail()
-   addToCart()
-   removeFromCart()
-   changeQuantity()
-   closeCart()
-   openCart()
+   Cho phép sử dụng dữ liệu từ console hoặc file khác
+   nếu sau này cần mở rộng.
    ========================================================= */
 
-window.products =
-    products;
+window.CocoonWebsite = {
 
-window.openProductDetail =
-    openProductDetail;
+    products,
 
-window.closeProductDetail =
-    closeProductDetail;
+    addToCart,
 
-window.addToCart =
-    addToCart;
+    removeFromCart,
 
-window.removeFromCart =
-    removeFromCart;
+    changeQuantity,
 
-window.changeQuantity =
-    changeQuantity;
+    openProductModal,
 
-window.openCart =
-    openCart;
+    closeProductModal,
 
-window.closeCart =
-    closeCart;
+    openCart,
 
-window.clearCart =
-    clearCart;
+    closeCart,
 
-window.filterProducts =
-    filterProducts;
+    formatPrice
 
-window.searchProducts =
-    searchProducts;
-
-window.prepareOrder =
-    prepareOrder;
-
-window.formatPrice =
-    formatPrice;
+};
